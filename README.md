@@ -1,1 +1,0 @@
-# comfirmatory_laboratory_vue
