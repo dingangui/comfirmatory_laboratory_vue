@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # org.njcdc.confirmatory_laboratory-vue-1.0
 
 ## Project setup
@@ -17,3 +18,6 @@ npm run build
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+=======
+# comfirmatory_laboratory_vue
+>>>>>>> 584364b3f705bfdcf9067584c3e2eed4efd5e081
