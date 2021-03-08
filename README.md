@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# org.njcdc.confirmatory_laboratory-vue-1.0
+# confirmatory_laboratory_vue
 
 ## Project setup
 ```
