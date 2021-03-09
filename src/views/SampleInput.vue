@@ -3,7 +3,7 @@
     <NavMenu></NavMenu>
     <h1>HIV抗体确证检测报告</h1>
 
-    样品受理编号：2021-1
+    <div>样品受理编号：{{ acceptanceNumber }}</div>
     <el-form :model="sampleBasicInfo" :rules="rules" ref="sampleBasicInfo" label-width="100px" class="demo-ruleForm">
 
       <el-row>
@@ -120,8 +120,8 @@
       <el-row>
         <el-col :span="12">
           <div class="grid-content bg-purple">
-            <el-form-item label="身份证号" prop="idNumber">
-              <el-input v-model="sampleBasicInfo.idNumber"></el-input>
+            <el-form-item label="身份证号" prop="IDNumber">
+              <el-input v-model="sampleBasicInfo.IDNumber"></el-input>
             </el-form-item>
           </div>
         </el-col>
@@ -142,7 +142,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="submitForm('sampleBasicInfo')">立即创建</el-button>
+        <el-button type="primary" @click="submitForm('sampleBasicInfo')">保存</el-button>
         <el-button @click="resetForm('sampleBasicInfo')">重置</el-button>
       </el-form-item>
     </el-form>
@@ -155,7 +155,7 @@ import NavMenu from "@/components/NavMenu";
 
 export default {
 
-  name: "Mains",
+  name: "SampleInput",
   components: {NavMenu},
   data() {
     return {
@@ -172,11 +172,12 @@ export default {
         nation: '汉',
         marriage: '已婚',
         educationalLevel: '高中',
-        idNumber: '1111',
+        IDNumber: '1111',
         phone: '2222',
         presentAddress: '河北省邢台市',
         residenceAddress: '四川省攀枝花市'
       },
+      acceptanceNumber: '',
       options: [{
         value: '选项1',
         label: '男'
@@ -222,8 +223,6 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
-          const _this = this
 
           // alert('提交成功!');
           /*
@@ -234,7 +233,7 @@ export default {
           * 引入 axios.js 需要 在main.js 中 import "./axios"
           * */
           this.$axios.post("/sample-basic-info/save", this.sampleBasicInfo).then(res => {
-                console.log(userInfo);
+                alert(res.data.msg);
                 console.log(res.data);
               }
           )
@@ -247,6 +246,13 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     }
+  },
+  created() {
+    const _this = this
+    this.$axios.get("/sample-basic-info/getAcceptanceNumber").then(res => {
+          _this.acceptanceNumber = res.data.data;
+        }
+    )
   }
 }
 </script>

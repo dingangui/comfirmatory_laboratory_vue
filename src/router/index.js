@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 import Login from '../views/Login.vue'
 import SignUp from "@/views/SignUp";
-import Mains from "@/views/Mains";
+import SampleInput from "@/views/SampleInput";
 
 Vue.use(VueRouter)
 
@@ -19,9 +19,9 @@ const routes = [
     component: SignUp
   },
   {
-    path: '/Mains',
-    name: 'Mains',
-    component: Mains
+    path: '/SampleInput',
+    name: 'SampleInput',
+    component: SampleInput
   }
 ]
 
