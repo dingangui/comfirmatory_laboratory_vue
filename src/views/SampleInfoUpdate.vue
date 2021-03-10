@@ -2,7 +2,7 @@
   <div>
     <NavMenu></NavMenu>
     <h1>HIV抗体确证检测报告</h1>
-
+  新增内容
     <div>样品受理编号：{{ acceptanceNumber }}</div>
     <el-form :model="sampleBasicInfo" :rules="rules" ref="sampleBasicInfo" label-width="100px" class="demo-ruleForm">
 
