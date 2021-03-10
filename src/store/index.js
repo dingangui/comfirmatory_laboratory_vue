@@ -15,7 +15,8 @@ export default new Vuex.Store({
   state: {
 
       token: '',
-      userInfo: JSON.parse(sessionStorage.getItem("userInfo"))
+      userInfo: JSON.parse(sessionStorage.getItem("userInfo")),
+
     },
 
   // mutations：设置 state 中私有变量的 set 方法

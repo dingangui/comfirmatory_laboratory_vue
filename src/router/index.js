@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import SignUp from "@/views/SignUp";
 import SampleInput from "@/views/SampleInput";
+import SampleInfoUpdate from "@/views/SampleInfoUpdate";
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
     path: '/SampleInput',
     name: 'SampleInput',
     component: SampleInput
+  },
+  {
+    path: '/SampleInfoUpdate/:AcceptanceNumber',
+    name: 'SampleInfoUpdate',
+    component: SampleInfoUpdate
   }
 ]
 

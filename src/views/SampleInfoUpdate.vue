@@ -142,40 +142,23 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="submitForm('sampleBasicInfo')">保存</el-button>
-        <el-button @click="resetForm('sampleBasicInfo')">重置</el-button>
+        <el-button type="primary" @click="submitForm('sampleBasicInfo')">修改</el-button>
+        <el-button @click="cancel()">取消修改</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
-
 import NavMenu from "@/components/NavMenu";
 
 export default {
-
-  name: "SampleInput",
   components: {NavMenu},
+  name: "SampleInfoUpdate",
   data() {
     return {
       sampleBasicInfo: {
-        inspectionUnit: '第一医院',
-        inspectionDate: '2021-03-09',
-        sampleType: '血液',
-        inspectedType: '门诊',
-        name: '王w一',
-        sex: '男',
-        age: '29',
-        profession: '工人',
-        country: '中国',
-        nation: '汉',
-        marriage: '已婚',
-        educationalLevel: '高中',
-        IDNumber: '1111',
-        phone: '2222',
-        presentAddress: '河北省邢台市',
-        residenceAddress: '四川省攀枝花市'
+
       },
       acceptanceNumber: '',
       options: [{
@@ -223,7 +206,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          const _this = this;
+
           // alert('提交成功!');
           /*
           * post 中的 this.sampleBasicInfo 表示 post 提交到对应链接时的内容
@@ -235,8 +218,6 @@ export default {
           this.$axios.post("/sample-basic-info/save", this.sampleBasicInfo).then(res => {
                 alert(res.data.msg);
                 console.log(res.data);
-                _this.$router.push("/SampleInfoUpdate/"+ _this.acceptanceNumber);
-                _this.$store.commit("")
               }
           )
         } else {
@@ -245,15 +226,20 @@ export default {
         }
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    cancel() {
+      this.$router.push("/");
     }
   },
   created() {
+    const acceptanceNumber = this.$route.params.AcceptanceNumber
     const _this = this
-    this.$axios.get("/sample-basic-info/getAcceptanceNumber").then(res => {
-          _this.acceptanceNumber = res.data.data;
-        }
+    _this.acceptanceNumber = acceptanceNumber;
+
+    this.$axios.get("/sample-basic-info/getSampleInfoByAcceptanceNumber/"+acceptanceNumber).then(res => {
+      console.log(res.data.data)
+      _this.sampleBasicInfo = res.data.data
+
+      }
     )
   }
 }
