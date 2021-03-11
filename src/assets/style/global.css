@@ -4,3 +4,33 @@ html, body {
     margin: 0;
     background-image: url("../11.png");
 }
+
+.detection-data-input-sample-info {
+    margin: 50px;
+}
+
+.detection-data-input-sample-info .el-col {
+    border: solid 1px #000;
+    height: 50px;
+    display: block;
+}
+
+.detection-data-input-sample-info .el-input__inner {
+    background: none;
+    opacity: unset;
+    border: none;
+    color: #870b0b;
+    margin-top: 5px;
+}
+
+.detection-data-input-sample-info .grid-content {
+    line-height: 50px;
+}
+
+.detection-data-input-sample-info .el-form {
+    border: solid 1px #000;
+}
+
+.detection-data-input-sample-info > .grid-content {
+    border: inset 1px #000;
+}
