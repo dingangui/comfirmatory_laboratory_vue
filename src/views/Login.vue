@@ -2,7 +2,7 @@
   <div>
     <el-container>
       <el-header>
-        <h1>H I V 抗 体 检 测 中 心</h1>
+        <h1>HIV 抗 体 检 测 中 心</h1>
       </el-header>
       <el-main>
         <!--
@@ -126,10 +126,13 @@ export default {
 </script>
 
 <style scoped>
-.mlogo {
-  height: 60%;
-  width: 8%;
-  margin-top: 10px;
+.el-header {
+  color: #111111;
+  padding: 50px 0 50px 120px;
+  max-width: 1000px;
+  text-align: center;
+  letter-spacing: 20px;
+  margin: auto;
 }
 
 .userForm{
@@ -137,37 +140,9 @@ export default {
   margin: auto;
 }
 
-.el-header {
-  background-color: #B3C0D1;
-  color: #333;
-  text-align: center;
-  line-height: 0;
-}
-
-.el-aside {
-  background-color: #D3DCE6;
-  color: #333;
-  text-align: center;
-  line-height: 200px;
-}
-
 .el-main {
-  background-color: #e9eef3;
-  color: #333;
   text-align: center;
-  line-height: 160px;
+  padding: 100px 0;
 }
 
-body > .el-container {
-  margin-bottom: 40px;
-}
-
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
-}
 </style>

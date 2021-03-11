@@ -1,151 +1,162 @@
 <template>
   <div>
-    <NavMenu></NavMenu>
-    <h1>HIV抗体确证检测报告</h1>
+    <el-container>
+      <el-header>
+        <NavMenu></NavMenu>
+      </el-header>
+      <el-container>
+        <el-aside width="200px">
 
-    <div>样品受理编号：{{ acceptanceNumber }}</div>
-    <el-form :model="sampleBasicInfo" :rules="rules" ref="sampleBasicInfo" label-width="100px" class="demo-ruleForm">
 
-      <el-row>
-        <el-col :span="12">
-          <div class="grid-content bg-purple">
-            <el-form-item label="送检单位" prop="inspectionUnit">
-              <el-input v-model="sampleBasicInfo.inspectionUnit"></el-input>
+        </el-aside>
+        <el-main>
+          <h1>HIV抗体确证检测报告</h1>
+          <div>样品受理编号：{{ acceptanceNumber }}</div>
+          <el-form :model="sampleBasicInfo" :rules="rules" ref="sampleBasicInfo" label-width="100px" class="demo-ruleForm">
+
+            <el-row>
+              <el-col :span="12">
+                <div class="grid-content bg-purple">
+                  <el-form-item label="送检单位" prop="inspectionUnit">
+                    <el-input v-model="sampleBasicInfo.inspectionUnit"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+              <el-col :span="12">
+                <div class="grid-content bg-purple-light">
+                  <el-form-item label="送检日期" prop="inspectionDate">
+                    <el-date-picker
+                        v-model="sampleBasicInfo.inspectionDate"
+                        align="left"
+                        type="date"
+                        placeholder="选择日期"
+                        size="large"
+                        :picker-options="pickerOptions">
+                    </el-date-picker>
+                  </el-form-item>
+
+                </div>
+              </el-col>
+            </el-row>
+
+            <el-row>
+              <el-col :span="12">
+                <div class="grid-content bg-purple">
+                  <el-form-item label="送检样品" prop="sampleType">
+                    <el-input v-model="sampleBasicInfo.sampleType"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+              <el-col :span="12">
+                <div class="grid-content bg-purple-light">
+                  <el-form-item label="送检人群" prop="inspectedType">
+                    <el-input v-model="sampleBasicInfo.inspectedType"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+            </el-row>
+
+            <el-row>
+              <el-col :span="6">
+                <div class="grid-content bg-purple">
+                  <el-form-item label="姓名" prop="name">
+                    <el-input v-model="sampleBasicInfo.name"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content bg-purple-light">
+                  <el-form-item label="年龄" prop="age">
+                    <el-input v-model="sampleBasicInfo.age"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content bg-purple">
+                  <el-form-item label="性别" prop="sex">
+                    <el-select v-model="sampleBasicInfo.sex" placeholder="请选择">
+                      <el-option
+                          v-for="item in options"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content bg-purple-light">
+                  <el-form-item label="职业" prop="profession">
+                    <el-input v-model="sampleBasicInfo.profession"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+            </el-row>
+
+            <el-row>
+              <el-col :span="6">
+                <div class="grid-content bg-purple">
+                  <el-form-item label="国籍" prop="country">
+                    <el-input v-model="sampleBasicInfo.country"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content bg-purple-light">
+                  <el-form-item label="民族" prop="nation">
+                    <el-input v-model="sampleBasicInfo.nation"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content bg-purple">
+                  <el-form-item label="婚姻状况" prop="marriage">
+                    <el-input v-model="sampleBasicInfo.marriage"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content bg-purple-light">
+                  <el-form-item label="文化程度" prop="educationalLevel">
+                    <el-input v-model="sampleBasicInfo.educationalLevel"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+            </el-row>
+
+            <el-row>
+              <el-col :span="12">
+                <div class="grid-content bg-purple">
+                  <el-form-item label="身份证号" prop="IDNumber">
+                    <el-input v-model="sampleBasicInfo.IDNumber"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+              <el-col :span="12">
+                <div class="grid-content bg-purple-light">
+                  <el-form-item label="联系电话" prop="phone">
+                    <el-input v-model="sampleBasicInfo.phone"></el-input>
+                  </el-form-item>
+                </div>
+              </el-col>
+            </el-row>
+
+            <el-form-item label="现住址" prop="presentAddress">
+              <el-input v-model="sampleBasicInfo.presentAddress"></el-input>
             </el-form-item>
-          </div>
-        </el-col>
-        <el-col :span="12">
-          <div class="grid-content bg-purple-light">
-            <el-form-item label="送检日期" prop="inspectionDate">
-              <el-date-picker
-                  v-model="sampleBasicInfo.inspectionDate"
-                  align="left"
-                  type="date"
-                  placeholder="选择日期"
-                  size="large"
-                  :picker-options="pickerOptions">
-              </el-date-picker>
+            <el-form-item label="户籍住址" prop="residenceAddress">
+              <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
             </el-form-item>
 
-          </div>
-        </el-col>
-      </el-row>
+            <el-form-item>
+              <el-button type="primary" @click="submitForm('sampleBasicInfo')">保存</el-button>
+              <el-button @click="resetForm('sampleBasicInfo')">重置</el-button>
+            </el-form-item>
+          </el-form></el-main>
+      </el-container>
+    </el-container>
 
-      <el-row>
-        <el-col :span="12">
-          <div class="grid-content bg-purple">
-            <el-form-item label="送检样品" prop="sampleType">
-              <el-input v-model="sampleBasicInfo.sampleType"></el-input>
-            </el-form-item>
-          </div>
-        </el-col>
-        <el-col :span="12">
-          <div class="grid-content bg-purple-light">
-            <el-form-item label="送检人群" prop="inspectedType">
-              <el-input v-model="sampleBasicInfo.inspectedType"></el-input>
-            </el-form-item>
-          </div>
-        </el-col>
-      </el-row>
-
-      <el-row>
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
-            <el-form-item label="姓名" prop="name">
-              <el-input v-model="sampleBasicInfo.name"></el-input>
-            </el-form-item>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="grid-content bg-purple-light">
-            <el-form-item label="年龄" prop="age">
-              <el-input v-model="sampleBasicInfo.age"></el-input>
-            </el-form-item>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
-            <el-form-item label="性别" prop="sex">
-              <el-select v-model="sampleBasicInfo.sex" placeholder="请选择">
-                <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="grid-content bg-purple-light">
-            <el-form-item label="职业" prop="profession">
-              <el-input v-model="sampleBasicInfo.profession"></el-input>
-            </el-form-item>
-          </div>
-        </el-col>
-      </el-row>
-
-      <el-row>
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
-            <el-form-item label="国籍" prop="country">
-              <el-input v-model="sampleBasicInfo.country"></el-input>
-            </el-form-item>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="grid-content bg-purple-light">
-            <el-form-item label="民族" prop="nation">
-              <el-input v-model="sampleBasicInfo.nation"></el-input>
-            </el-form-item>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
-            <el-form-item label="婚姻状况" prop="marriage">
-              <el-input v-model="sampleBasicInfo.marriage"></el-input>
-            </el-form-item>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="grid-content bg-purple-light">
-            <el-form-item label="文化程度" prop="educationalLevel">
-              <el-input v-model="sampleBasicInfo.educationalLevel"></el-input>
-            </el-form-item>
-          </div>
-        </el-col>
-      </el-row>
-
-      <el-row>
-        <el-col :span="12">
-          <div class="grid-content bg-purple">
-            <el-form-item label="身份证号" prop="IDNumber">
-              <el-input v-model="sampleBasicInfo.IDNumber"></el-input>
-            </el-form-item>
-          </div>
-        </el-col>
-        <el-col :span="12">
-          <div class="grid-content bg-purple-light">
-            <el-form-item label="联系电话" prop="phone">
-              <el-input v-model="sampleBasicInfo.phone"></el-input>
-            </el-form-item>
-          </div>
-        </el-col>
-      </el-row>
-
-      <el-form-item label="现住址" prop="presentAddress">
-        <el-input v-model="sampleBasicInfo.presentAddress"></el-input>
-      </el-form-item>
-      <el-form-item label="户籍住址" prop="residenceAddress">
-        <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
-      </el-form-item>
-
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('sampleBasicInfo')">保存</el-button>
-        <el-button @click="resetForm('sampleBasicInfo')">重置</el-button>
-      </el-form-item>
-    </el-form>
   </div>
 </template>
 
