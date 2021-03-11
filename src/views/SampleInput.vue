@@ -190,10 +190,10 @@ export default {
       },
       acceptanceNumber: '',
       options: [{
-        value: '选项1',
+        value: '男',
         label: '男'
       }, {
-        value: '选项2',
+        value: '女',
         label: '女'
       }],
 

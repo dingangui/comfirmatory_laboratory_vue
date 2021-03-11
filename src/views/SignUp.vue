@@ -60,7 +60,7 @@ export default {
 
             // 登录成功后跳转（router）
             // push的路径是vue中的链接
-            _this.$router.push("/Mains")
+            _this.$router.push("/SampleInput")
 
           })
         } else {

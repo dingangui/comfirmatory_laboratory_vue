@@ -162,10 +162,10 @@ export default {
       },
       acceptanceNumber: '',
       options: [{
-        value: '选项1',
+        value: '男',
         label: '男'
       }, {
-        value: '选项2',
+        value: '女',
         label: '女'
       }],
 
@@ -215,7 +215,7 @@ export default {
           * 引入 axios.js 后，就可以不用在 url 中写上 http://localhost:5000 了
           * 引入 axios.js 需要 在main.js 中 import "./axios"
           * */
-          this.$axios.post("/sample-basic-info/save", this.sampleBasicInfo).then(res => {
+          this.$axios.post("/sample-basic-info/update", this.sampleBasicInfo).then(res => {
                 alert(res.data.msg);
                 console.log(res.data);
               }
