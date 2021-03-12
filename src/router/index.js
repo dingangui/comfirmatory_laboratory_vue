@@ -6,6 +6,7 @@ import SignUp from "@/views/SignUp";
 import SampleInput from "@/views/SampleInput";
 import SampleInfoUpdate from "@/views/SampleInfoUpdate";
 import DetectionDataInput from "@/views/DetectionDataInput";
+import Test from "@/views/Test";
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,11 @@ const routes = [
     path: '/DetectionDataInput',
     name: 'DetectionDataInput',
     component: DetectionDataInput
+  },
+  {
+    path: '/Test',
+    name: 'Test',
+    component: Test
   }
 ]
 

@@ -5,17 +5,54 @@ html, body {
     background-image: url("../11.png");
 }
 
-.detection-data-input-sample-info {
+/*
+------------------------
+
+导航栏style
+
+*/
+.el-header {
+    padding: 0 50px;
+    background-color: #545c64;
+}
+
+.el-menu {
+    background-color: #545c64;
+    color: #fff;
+}
+
+.el-menu--horizontal > .el-menu-item {
+    color: #fff;
+}
+
+#login-el-header {
+    background: none;
+}
+
+.username {
+    float: right;
+    line-height: 58px;
+}
+
+/*
+------------------------
+
+检测数据输入style
+
+*/
+.detection-data-input .sample-info,
+.detection-data-input .data-input {
     margin: 50px;
 }
 
-.detection-data-input-sample-info .el-col {
-    border: solid 1px #000;
+.detection-data-input .sample-info .el-col {
+    border-left: solid 2px #000;
+    border-top: solid 2px #000;
     height: 50px;
     display: block;
 }
 
-.detection-data-input-sample-info .el-input__inner {
+.detection-data-input .sample-info .el-input__inner {
     background: none;
     opacity: unset;
     border: none;
@@ -23,24 +60,40 @@ html, body {
     margin-top: 5px;
 }
 
-.detection-data-input-sample-info .grid-content {
+.detection-data-input .sample-info .grid-content {
     line-height: 50px;
 }
 
-.detection-data-input-sample-info .el-form {
-    border: solid 1px #000;
+.detection-data-input .sample-info .sample-info-div {
+    border-bottom: solid 2px #000;
+    border-right: solid 2px #000;
+
 }
 
-.el-header{
-    padding: 0 50px;
-    background-color: #545c64;
+
+
+/*
+------------------------
+
+样品基本信息输入style
+
+*/
+.sample-input .main {
+    padding: 0 250px;
+    margin: 20px auto;
 }
 
-.el-menu{
-    background-color: #545c64;
-    color: #fff;
+.sample-input .main .acceptanceNumber {
+    text-align: right;
+    line-height: 50px;
 }
 
-.el-menu--horizontal>.el-menu-item{
-    color: #fff;
+/*
+------------------------
+
+全局style
+
+*/
+h1 {
+    letter-spacing: 20px;
 }

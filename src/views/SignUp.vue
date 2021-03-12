@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-header>
+      <el-header id="login-el-header">
         <h1>HIV 抗 体 检 测 中 心</h1>
       </el-header>
       <el-main>

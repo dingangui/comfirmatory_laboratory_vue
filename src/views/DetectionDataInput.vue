@@ -1,6 +1,6 @@
 <template>
     <!--  最外层 唯一 div -->
-    <div>
+    <div class="detection-data-input">
         <!-- 唯一 div 内负责布局管理的 -->
         <el-container>
 
@@ -13,10 +13,10 @@
             <el-container>
 
                 <!-- 左侧，样品基本信息显示 -->
-                <el-col :span="12" class="detection-data-input-sample-info">
+                <el-col :span="12" class="sample-info">
 
                     <!-- 负责左侧布局管理的 div -->
-                    <div class="grid-content bg-purple">
+                    <div class="grid-content bg-purple sample-info-div">
 
                         <!-- 表单 快速填写样品基本信息 -->
                         <el-form :model="sampleBasicInfo" :rules="rules" ref="sampleBasicInfo">
@@ -152,7 +152,7 @@
                                     <div class="grid-content bg-purple">本样品信息录入员</div>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-input readonly v-model="sampleBasicInfo.IDNumber"></el-input>
+                                    <el-input readonly v-model="sampleBasicInfo.dataEntryStaffName"></el-input>
                                 </el-col>
                             </el-row>
                             <!-- 表单 快速填写样品基本信息 -->
@@ -163,13 +163,61 @@
                     <!-- 左侧，样品基本信息显示 -->
                 </el-col>
 
-                <el-col :span="1">
-                    <div class="grid-content bg-purple-light"></div>
-                </el-col>
 
-                <!-- 右侧 -->
-                <el-col :span="12">
-                    <div class="grid-content bg-purple-light"></div>
+                <!-- 右侧 检测数据输入栏  -->
+                <el-col :span="12" class="data-input">
+                    <div class="grid-content bg-purple-light">
+
+                        <el-row>
+                            <el-col :span="6">
+                                <div class="grid-content bg-purple">户籍地址</div>
+                            </el-col>
+                            <el-col :span="6">
+                                <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
+                            </el-col>
+                            <el-col :span="6">
+                                <div class="grid-content bg-purple">户籍地址</div>
+                            </el-col>
+                            <el-col :span="6">
+                                <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
+                            </el-col>
+                        </el-row>
+
+                        <el-row>
+                            <el-col :span="6">
+                                <div class="grid-content bg-purple">户籍地址</div>
+                            </el-col>
+                            <el-col :span="6">
+                                <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
+                            </el-col>
+                            <el-col :span="6">
+                                <div class="grid-content bg-purple">户籍地址</div>
+                            </el-col>
+                            <el-col :span="6">
+                                <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
+                            </el-col>
+                        </el-row>
+
+                        <el-row>
+                            <el-col :span="6">
+                                <div class="grid-content bg-purple">户籍地址</div>
+                            </el-col>
+                            <el-col :span="6">
+                                <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
+                            </el-col>
+                            <el-col :span="6">
+                                <div class="grid-content bg-purple">户籍地址</div>
+                            </el-col>
+                            <el-col :span="6">
+                                <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
+                            </el-col>
+                        </el-row>
+
+
+
+
+
+                    </div>
 
                     <!-- 右侧 -->
                 </el-col>
@@ -199,7 +247,7 @@ export default {
     },
     created() {
         const _this = this
-        this.$axios("/sample-basic-info/getSampleInfoByAcceptanceNumber/2021 - 7").then(res => {
+        this.$axios("/sample-basic-info/getSampleInfoByAcceptanceNumber/2021 - 14").then(res => {
                 console.log(res.data.data)
                 _this.sampleBasicInfo = res.data.data
             }
