@@ -202,7 +202,6 @@ export default {
         this.$axios("/sample-basic-info/getSampleInfoByAcceptanceNumber/2021 - 7").then(res => {
                 console.log(res.data.data)
                 _this.sampleBasicInfo = res.data.data
-                _this.activeIndex = '3'
             }
         )
     }

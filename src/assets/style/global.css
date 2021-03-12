@@ -31,6 +31,16 @@ html, body {
     border: solid 1px #000;
 }
 
-.detection-data-input-sample-info > .grid-content {
-    border: inset 1px #000;
+.el-header{
+    padding: 0 50px;
+    background-color: #545c64;
+}
+
+.el-menu{
+    background-color: #545c64;
+    color: #fff;
+}
+
+.el-menu--horizontal>.el-menu-item{
+    color: #fff;
 }
