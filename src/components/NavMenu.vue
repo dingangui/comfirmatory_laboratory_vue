@@ -54,20 +54,20 @@ export default {
                     items: [],
                 },
                 {
-                    title: "样品信息输入",
+                    title: "录入样品信息",
                     key: "/SampleInput",
                     path: "",
                     items: [],
                 },
                 {
-                    title: "检测结果输入",
+                    title: "输入检测结果",
                     key: "/DetectionDataInput",
                     path: "",
                     items: [],
                 },
                 {
                     title: "导出报表",
-                    key: "",
+                    key: "/DetectionDataInput",
                     path: "",
                     items: [
                         {
@@ -109,6 +109,7 @@ export default {
             this.username = this.$store.getters.getUser.username
         }
     }
+
 
 }
 </script>

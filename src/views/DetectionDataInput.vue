@@ -16,147 +16,9 @@
                 <el-col :span="12" class="sample-info">
 
                     <!-- 负责左侧布局管理的 div -->
-                    <div class="grid-content bg-purple sample-info-div">
+                    <div class="grid-content bg-purple">
 
-                        <!-- 表单 快速填写样品基本信息 -->
-                        <el-form :model="sampleBasicInfo" :rules="rules" ref="sampleBasicInfo">
-
-                            <!-- 第一行 -->
-                            <el-row>
-
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">送检单位</div>
-                                </el-col>
-
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple-light">
-                                        <el-input readonly v-model="sampleBasicInfo.inspectionUnit"></el-input>
-                                    </div>
-                                </el-col>
-
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">送检日期</div>
-                                </el-col>
-
-                                <el-col :span="6">
-                                    <el-input readonly v-model="sampleBasicInfo.inspectionDate"></el-input>
-                                </el-col>
-
-                                <!--第一行-->
-                            </el-row>
-
-                            <el-row>
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">送检样品</div>
-                                </el-col>
-                                <el-col :span="6">
-                                    <el-input readonly v-model="sampleBasicInfo.sampleType"></el-input>
-                                </el-col>
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">送检人群</div>
-                                </el-col>
-                                <el-col :span="6">
-                                    <el-input readonly v-model="sampleBasicInfo.inspectedType"></el-input>
-                                </el-col>
-                            </el-row>
-
-                            <el-row>
-                                <el-col :span="3">
-                                    <div class="grid-content bg-purple">姓名</div>
-                                </el-col>
-                                <el-col :span="3">
-                                    <el-input readonly v-model="sampleBasicInfo.name"></el-input>
-                                </el-col>
-                                <el-col :span="3">
-                                    <div class="grid-content bg-purple">性别</div>
-                                </el-col>
-                                <el-col :span="3">
-                                    <el-input readonly v-model="sampleBasicInfo.sex"></el-input>
-                                </el-col>
-                                <el-col :span="3">
-                                    <div class="grid-content bg-purple">年龄</div>
-                                </el-col>
-                                <el-col :span="3">
-                                    <el-input readonly v-model="sampleBasicInfo.age"></el-input>
-                                </el-col>
-                                <el-col :span="3">
-                                    <div class="grid-content bg-purple">职业</div>
-                                </el-col>
-                                <el-col :span="3">
-                                    <el-input readonly v-model="sampleBasicInfo.profession"></el-input>
-                                </el-col>
-                            </el-row>
-
-                            <el-row>
-                                <el-col :span="3">
-                                    <div class="grid-content bg-purple">国籍</div>
-                                </el-col>
-                                <el-col :span="3">
-                                    <el-input readonly v-model="sampleBasicInfo.country"></el-input>
-                                </el-col>
-                                <el-col :span="3">
-                                    <div class="grid-content bg-purple">民族</div>
-                                </el-col>
-                                <el-col :span="3">
-                                    <el-input readonly v-model="sampleBasicInfo.nation"></el-input>
-                                </el-col>
-                                <el-col :span="3">
-                                    <div class="grid-content bg-purple">婚姻状况</div>
-                                </el-col>
-                                <el-col :span="3">
-                                    <el-input readonly v-model="sampleBasicInfo.marriage"></el-input>
-                                </el-col>
-                                <el-col :span="3">
-                                    <div class="grid-content bg-purple">文化程度</div>
-                                </el-col>
-                                <el-col :span="3">
-                                    <el-input readonly v-model="sampleBasicInfo.educationalLevel"></el-input>
-                                </el-col>
-                            </el-row>
-
-                            <el-row>
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">身份证号</div>
-                                </el-col>
-                                <el-col :span="6">
-                                    <el-input readonly v-model="sampleBasicInfo.IDNumber"></el-input>
-                                </el-col>
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">联系电话</div>
-                                </el-col>
-                                <el-col :span="6">
-                                    <el-input readonly v-model="sampleBasicInfo.phone"></el-input>
-                                </el-col>
-                            </el-row>
-
-                            <el-row>
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">现住址</div>
-                                </el-col>
-                                <el-col :span="18">
-                                    <el-input readonly v-model="sampleBasicInfo.presentAddress"></el-input>
-                                </el-col>
-                            </el-row>
-
-                            <el-row>
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">户籍地址</div>
-                                </el-col>
-                                <el-col :span="18">
-                                    <el-input readonly v-model="sampleBasicInfo.residenceAddress"></el-input>
-                                </el-col>
-                            </el-row>
-
-                            <el-row>
-                                <el-col :span="12">
-                                    <div class="grid-content bg-purple">本样品信息录入员</div>
-                                </el-col>
-                                <el-col :span="12">
-                                    <el-input readonly v-model="sampleBasicInfo.dataEntryStaffName"></el-input>
-                                </el-col>
-                            </el-row>
-                            <!-- 表单 快速填写样品基本信息 -->
-                        </el-form>
+                        <SampleInfo></SampleInfo>
 
                         <!-- 负责左侧布局管理的 div -->
                     </div>
@@ -164,57 +26,102 @@
                 </el-col>
 
 
-                <!-- 右侧 检测数据输入栏  -->
+                <!-- 右侧 检测检测结果显示和输入栏  -->
                 <el-col :span="12" class="data-input">
+
                     <div class="grid-content bg-purple-light">
-
+                        <h1 v-show="true">初筛数据输入</h1>
+                        <h1 v-show="false">第一次复检结果输入</h1>
+                        <h1 v-show="false">第二次复检结果输入</h1>
                         <el-row>
                             <el-col :span="6">
-                                <div class="grid-content bg-purple">户籍地址</div>
+                                <div class="grid-content bg-purple">检测方法</div>
                             </el-col>
                             <el-col :span="6">
-                                <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
+                                <el-input v-model="detectionRecords.residenceAddress"></el-input>
                             </el-col>
                             <el-col :span="6">
-                                <div class="grid-content bg-purple">户籍地址</div>
+                                <div class="grid-content bg-purple">检测日期</div>
                             </el-col>
                             <el-col :span="6">
-                                <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
+                                <el-date-picker
+                                    v-model="detectionRecords.inspectionDate"
+                                    align="left"
+                                    type="date"
+                                    placeholder="选择日期"
+                                    size="large"
+                                    :picker-options="pickerOptions">
+                                </el-date-picker>
                             </el-col>
                         </el-row>
 
                         <el-row>
                             <el-col :span="6">
-                                <div class="grid-content bg-purple">户籍地址</div>
+                                <div class="grid-content bg-purple">试剂厂家</div>
                             </el-col>
                             <el-col :span="6">
-                                <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
+                                <el-input v-model="detectionRecords.residenceAddress"></el-input>
                             </el-col>
                             <el-col :span="6">
-                                <div class="grid-content bg-purple">户籍地址</div>
+                                <div class="grid-content bg-purple">批号</div>
                             </el-col>
                             <el-col :span="6">
-                                <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
+                                <el-input v-model="detectionRecords.residenceAddress"></el-input>
                             </el-col>
                         </el-row>
 
                         <el-row>
                             <el-col :span="6">
-                                <div class="grid-content bg-purple">户籍地址</div>
+                                <div class="grid-content bg-purple">有效日期</div>
                             </el-col>
                             <el-col :span="6">
-                                <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
+                                <el-date-picker
+                                    v-model="detectionRecords.inspectionDate"
+                                    align="left"
+                                    type="date"
+                                    placeholder="选择日期"
+                                    size="large"
+                                    :picker-options="pickerOptions">
+                                </el-date-picker>
                             </el-col>
                             <el-col :span="6">
-                                <div class="grid-content bg-purple">户籍地址</div>
+                                <div class="grid-content bg-purple">检测结果</div>
                             </el-col>
                             <el-col :span="6">
-                                <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
+                                <el-select v-model="detectionRecords.sex" placeholder="请选择">
+                                    <el-option
+                                        v-for="item in testResults"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                    </el-option>
+                                </el-select>
                             </el-col>
                         </el-row>
 
+                        <el-row>
+                            <el-col :span="6">
+                                <div class="grid-content bg-purple">筛查结论</div>
+                            </el-col>
+                            <el-col :span="6">
+                                <el-select v-model="detectionRecords.sex" placeholder="请选择">
+                                    <el-option
+                                        v-for="item in conclusions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                    </el-option>
+                                </el-select>                            </el-col>
+                        </el-row>
 
+                        <el-row>
+                            <el-col :span="24">
+                                <div class="username">
+                                    本次检测结果输入人：{{ username }}
+                                </div>
+                            </el-col>
 
+                        </el-row>
 
 
                     </div>
@@ -233,25 +140,72 @@
 
 <script>
 import NavMenu from "@/components/NavMenu";
+import SampleInfo from "@/components/SampleInfo";
 
 export default {
     name: "DetectionDataInput",
-    components: {NavMenu},
+    components: {NavMenu, SampleInfo},
     data() {
         return {
-            sampleBasicInfo: {
-                inspectionUnit: ""
+            detectionRecords:{
             },
-            rules: {}
+            testResults: [{
+                value: '有反应',
+                label: '有反应'
+            }, {
+                value: '无反应',
+                label: '无反应'
+            }],
+            conclusions:[{
+                value: 'HIV抗体阴性',
+                label: 'HIV抗体阴性'
+            },{
+                value: 'HIV抗体阳性',
+                label: 'HIV抗体阳性'
+            },{
+                value: 'HIV感染待确定',
+                label: 'HIV感染待确定'
+            },
+            ],
+            rules: {},
+            pickerOptions: {
+                disabledDate(time) {
+                    return time.getTime() > Date.now();
+                },
+                shortcuts: [{
+                    text: '今天',
+                    onClick(picker) {
+                        picker.$emit('pick', new Date());
+                    }
+                }, {
+                    text: '昨天',
+                    onClick(picker) {
+                        const date = new Date();
+                        date.setTime(date.getTime() - 3600 * 1000 * 24);
+                        picker.$emit('pick', date);
+                    }
+                }, {
+                    text: '一周前',
+                    onClick(picker) {
+                        const date = new Date();
+                        date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                        picker.$emit('pick', date);
+                    }
+                }]
+            }
         }
     },
     created() {
-        const _this = this
-        this.$axios("/sample-basic-info/getSampleInfoByAcceptanceNumber/2021 - 14").then(res => {
-                console.log(res.data.data)
-                _this.sampleBasicInfo = res.data.data
-            }
-        )
+        // this.$axios.get("/detectionRecords/selectAll").then(res => {
+        //         console.log(res.data.data)
+        //         _this.sampleBasicInfo = res.data.data
+        //
+        //     }
+        // )
+        if (this.$store.getters.getUser.username) {
+            console.log(this.$store.getters.getUser.username)
+            this.username = this.$store.getters.getUser.username
+        }
     }
 
 }
