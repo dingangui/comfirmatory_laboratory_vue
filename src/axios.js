@@ -6,43 +6,49 @@ import router from './router'
 // 引入axios.js需要在main.js中import "./axios"
 axios.defaults.baseURL = "http://localhost:5000"
 
-// 前置拦截
 axios.interceptors.request.use(config => {
+    console.log("前置拦截")
+    // 可以统一设置请求头
     return config
 })
 
-// 后置拦截
 axios.interceptors.response.use(response => {
-        let res = response.data;
-        console.log(res)
-
-        // 状态码 200 时，表示没有问题，直接return即可（不做任何操作）
+        const res = response.data;
+        console.log("后置拦截")
+        // 当结果的code是否为200的情况
         if (res.code === 200) {
             return response
-
-        }
-        // 状态码不为 200 时，表示出现问题，则通过弹窗提示错误
-
-        else {
-
-            // 弹窗本来是通过this.$message.error(response.data.msg, {duration: 2 * 1000})
-            // 但是这里是js，所以通过 import Element from "element-ui"来使用
-            Element.Message.error(response.data.msg, {duration: 2 * 1000})
-
-            // 异常提示之后，组织前端进入别的页面
+        } else {
+            // 弹窗异常信息
+            Element.Message({
+                message: response.data.msg,
+                type: 'error',
+                duration: 2 * 1000
+            })
+            // 直接拒绝往下面返回结果信息
             return Promise.reject(response.data.msg)
         }
-
-    }
-    ,
-    // 产生报错后，即error发生后，执行下面的操作
-
+    },
     error => {
-        console.log(error)
-        if (error.response.status === 400) {
-            store.commit("REMOVE_INFO")
-            router.push("/")
+        console.log('err' + error)// for debug
+        if (error.response.data) {
+            error.message = error.response.data.msg
         }
-        Element.Message.error(error.response.data.msg, {duration: 2 * 1000})
+        // 根据请求状态觉得是否登录或者提示其他
+        if (error.response.status === 401) {
+            store.commit('REMOVE_INFO');
+            router.push({
+                path: '/'
+            });
+            error.message = '请重新登录';
+        }
+        if (error.response.status === 403) {
+            error.message = '权限不足，无法访问';
+        }
+        Element.Message({
+            message: error.message,
+            type: 'error',
+            duration: 3 * 1000
+        })
         return Promise.reject(error)
     })

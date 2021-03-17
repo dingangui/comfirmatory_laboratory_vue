@@ -87,10 +87,6 @@ export default {
     },
     props: {},
     methods: {
-        handleSelect(key, keyPath) {
-            console.log("handle selected: " + key + " " + keyPath);
-            this.$router.push(key);
-        },
         logout() {
             const _this = this
             this.$axios.get("/logout", {
@@ -99,9 +95,14 @@ export default {
                 }
             }).then((res) => {
                 _this.$store.commit('REMOVE_INFO')
-                _this.$router.push('/login')
+                _this.$router.push('/')
             });
-        }
+        },
+        handleSelect(key, keyPath) {
+            console.log("handle selected: " + key + " " + keyPath);
+            this.$router.push(key);
+        },
+
     },
     created() {
         if (this.$store.getters.getUser.username) {

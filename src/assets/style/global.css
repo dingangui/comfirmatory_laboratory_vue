@@ -24,6 +24,7 @@ html, body {
 
 .el-main{
     line-height: 50px;
+    margin-bottom: 50px;
 }
 
 .text-align-right {
@@ -32,7 +33,9 @@ html, body {
     display: block;
 }
 
-
+.data-show .bg-purple{
+    font-weight: bold;
+}
 /*
 
     对显示后台数据的表格进行定义
@@ -41,10 +44,12 @@ html, body {
 
 .data-show{
     margin:0 25px;
+
 }
 .data-show .el-col{
-    border-left: solid 2px #000;
-    border-top: solid 2px #000;
+    outline: 1px solid #545c64;
+/*    border-left: solid 2px #000;
+    border-top: solid 2px #000;*/
     height: 50px;
     display: block;
 }
@@ -53,13 +58,14 @@ html, body {
     background: none;
     opacity: unset;
     border: none;
-    color: #870b0b;
-    margin-top: 5px;
+    /*color: #870b0b;*/
+    color: black;
 }
 
 .data-show .el-form{
-    border-bottom: solid 2px #000;
-    border-right: solid 2px #000;
+    outline: 3px solid #545c64;
+    /*    border-bottom: solid 2px #000;
+        border-right: solid 2px #000;*/
 }
 
 
@@ -114,5 +120,5 @@ html, body {
 
 */
 .sample-input {
-    padding: 0 250px;
+    padding: 20px 350px;
 }
