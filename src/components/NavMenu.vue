@@ -30,7 +30,7 @@
                 </el-menu-item>
 
             </template>
-            <div class="username">
+            <div class="text-align-right">
                 <span>当前用户：{{ username }}</span>&emsp;&emsp;&emsp;
                 <span><el-link type="danger" @click="logout">&emsp;退出</el-link></span>
             </div>

@@ -1,3 +1,13 @@
+/*
+
+
+全局style
+
+*/
+h1 {
+    letter-spacing: 20px;
+}
+
 html, body {
     height: 100vh;
     padding: 0;
@@ -5,11 +15,53 @@ html, body {
     background-image: url("../11.png");
 }
 
-
+.el-date-editor.el-input,
+.el-date-editor.el-input__inner,
 .el-select,
 .el-input__inner{
     width: 100%;
 }
+
+.el-main{
+    line-height: 50px;
+}
+
+.text-align-right {
+    text-align: right;
+    line-height: 58px;
+    display: block;
+}
+
+
+/*
+
+    对显示后台数据的表格进行定义
+
+*/
+
+.data-show{
+    margin:0 25px;
+}
+.data-show .el-col{
+    border-left: solid 2px #000;
+    border-top: solid 2px #000;
+    height: 50px;
+    display: block;
+}
+
+.data-show .el-input__inner {
+    background: none;
+    opacity: unset;
+    border: none;
+    color: #870b0b;
+    margin-top: 5px;
+}
+
+.data-show .el-form{
+    border-bottom: solid 2px #000;
+    border-right: solid 2px #000;
+}
+
 
 /*
 ------------------------
@@ -36,55 +88,22 @@ html, body {
 }
 
 
-.username {
-    float: right;
-    line-height: 58px;
-}
-
 /*
 ------------------------
 
-检测数据输入style
+输入检测数据 页面的 style
 
+------------------------
 */
-.detection-data-input .sample-info{
-    margin: 50px;
-}
 
-.detection-data-input .sample-info .el-col{
-    border-left: solid 2px #000;
-    border-top: solid 2px #000;
-    height: 50px;
-    display: block;
-}
 
-.detection-data-input .sample-info .el-input__inner {
-    background: none;
-    opacity: unset;
-    border: none;
-    color: #870b0b;
-    margin-top: 5px;
-}
+/*
+    输入检测数据 页面的 style
+        左侧样品基本信息区域
+*/
 
-.detection-data-input .sample-info .grid-content {
-    line-height: 50px;
-}
-
-.detection-data-input .sample-info .el-form {
-    border-bottom: solid 2px #000;
-    border-right: solid 2px #000;
-}
-
-.detection-data-input .data-input {
-    margin: 50px;
-}
-.detection-data-input .data-input .el-col{
-    height: 50px;
-    display: block;
-}
-
-.detection-data-input .data-input .grid-content {
-    line-height: 50px;
+.detection-data-input-area .el-form{
+    margin: 0 25px 0 -25px;
 }
 
 
@@ -94,22 +113,6 @@ html, body {
 样品基本信息输入style
 
 */
-.sample-input .main {
+.sample-input {
     padding: 0 250px;
-    margin: 20px auto;
-}
-
-.sample-input .main .acceptanceNumber {
-    text-align: right;
-    line-height: 50px;
-}
-
-/*
-------------------------
-
-全局style
-
-*/
-h1 {
-    letter-spacing: 20px;
 }
