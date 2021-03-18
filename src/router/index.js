@@ -7,12 +7,18 @@ import SampleInput from "@/views/SampleInput";
 import SampleInfoUpdate from "@/views/SampleInfoUpdate";
 import DetectionDataInput from "@/views/DetectionDataInput";
 import Test from "@/views/Test";
+import Index from "@/views/Index";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/Index',
+    name: 'Index',
+    component: Index
+  },
+  {
+    path: '/Login',
     name: 'Login',
     component: Login
   },
@@ -32,7 +38,7 @@ const routes = [
     component: SampleInfoUpdate
   },
   {
-    path: '/DetectionDataInput',
+    path: '/DetectionDataInput/:AcceptanceNumber',
     name: 'DetectionDataInput',
     component: DetectionDataInput
   },

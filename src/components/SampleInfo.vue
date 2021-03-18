@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div class="data-show">
-            <h1>HIV感染待确定报告(筛查实验室)</h1>
-            <!-- 表单 快速填写样品基本信息 -->
 
+        <div class="data-show">
+            <h1>HIV感染待确定报告</h1>
             <div class="text-align-right">样品受理编号：{{ acceptanceNumber }}</div>
 
+            <!-- 表单 快速填写样品基本信息 -->
             <div>
                 <el-form :model="sampleBasicInfo" :rules="rules" ref="sampleBasicInfo">
 
@@ -258,11 +258,15 @@
         },
         created() {
             const _this = this
-            this.$axios.get("/sample-basic-info/getSampleInfoByAcceptanceNumber/2021 - 14").then(res => {
+            const acceptanceNumber = sessionStorage.getItem("acceptanceNumber");
+            console.log(acceptanceNumber)
+            this.acceptanceNumber =acceptanceNumber;
+            this.$axios.get("/sampleBasicInfo/getSampleInfoByAcceptanceNumber/" + acceptanceNumber).then(res => {
                     console.log(res.data.data)
                     _this.sampleBasicInfo = res.data.data
                 }
             )
+
 
         }
     }

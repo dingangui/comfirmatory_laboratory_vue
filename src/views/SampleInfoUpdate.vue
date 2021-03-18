@@ -226,7 +226,7 @@
                         * 引入 axios.js 后，就可以不用在 url 中写上 http://localhost:5000 了
                         * 引入 axios.js 需要 在main.js 中 import "./axios"
                         * */
-                        this.$axios.post("/sample-basic-info/update", this.sampleBasicInfo).then(res => {
+                        this.$axios.post("/sampleBasicInfo/update", this.sampleBasicInfo).then(res => {
                                 alert(res.data.msg);
                                 console.log(res.data);
                             }
@@ -246,7 +246,7 @@
             const _this = this
             _this.acceptanceNumber = acceptanceNumber;
 
-            this.$axios.get("/sample-basic-info/getSampleInfoByAcceptanceNumber/" + acceptanceNumber).then(res => {
+            this.$axios.get("/sampleBasicInfo/getSampleInfoByAcceptanceNumber/" + acceptanceNumber).then(res => {
                     console.log(res.data.data)
                     _this.sampleBasicInfo = res.data.data
 

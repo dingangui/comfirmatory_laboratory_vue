@@ -177,10 +177,10 @@
             return {
                 sampleBasicInfo: {
                     inspectionUnit: '第一医院',
-                    inspectionDate: '2021-03-09',
+                    inspectionDate: '2021-03-19',
                     sampleType: '血液',
                     inspectedType: '门诊',
-                    name: '王w一',
+                    name: '王铅华',
                     sex: '男',
                     age: '29',
                     profession: '工人',
@@ -188,11 +188,12 @@
                     nation: '汉',
                     marriage: '已婚',
                     educationalLevel: '高中',
-                    IDNumber: '1111',
-                    phone: '2222',
-                    presentAddress: '河北省邢台市',
-                    residenceAddress: '四川省攀枝花市',
-                    dataEntryStaffName: ''
+                    IDNumber: '155547196805232241',
+                    phone: '18566589632',
+                    presentAddress: '河北省邢台市XX村',
+                    residenceAddress: '四川省攀枝花市XX镇',
+                    dataEntryStaffName:'',
+                    dataEntryStaffAccountID:''
                 },
                 acceptanceNumber: '',
                 options: [{
@@ -206,7 +207,6 @@
                 rules: {
                     name: [
                         {required: true, message: '请输入姓名', trigger: 'blur'},
-                        {min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur'}
                     ]
                 },
                 pickerOptions: {
@@ -242,6 +242,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.sampleBasicInfo.dataEntryStaffName = this.$store.getters.getUser.username
+                        this.sampleBasicInfo.dataEntryStaffAccountID = this.$store.getters.getUser.id
                         const _this = this;
                         // alert('提交成功!');
                         /*
@@ -251,7 +252,7 @@
                         * 引入 axios.js 后，就可以不用在 url 中写上 http://localhost:5000 了
                         * 引入 axios.js 需要 在main.js 中 import "./axios"
                         * */
-                        this.$axios.post("/sample-basic-info/save", this.sampleBasicInfo).then(res => {
+                        this.$axios.post("/sampleBasicInfo/save", this.sampleBasicInfo).then(res => {
                                 alert(res.data.msg);
                                 console.log(res.data);
                                 _this.$router.push("/SampleInfoUpdate/" + _this.acceptanceNumber);
@@ -270,7 +271,7 @@
         },
         created() {
             const _this = this
-            this.$axios.get("/sample-basic-info/getAcceptanceNumber").then(res => {
+            this.$axios.get("/sampleBasicInfo/getAcceptanceNumber").then(res => {
                     _this.acceptanceNumber = res.data.data;
                 }
             )

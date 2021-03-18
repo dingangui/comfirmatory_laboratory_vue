@@ -8,7 +8,7 @@
             class="el-menu-demo"
             active-text-color="#ffd04b">
 
-            <template class="el-menu-demo1" v-for="item in NavigateItem">
+            <template class="el-menu-demo1" v-for="item in navigateItem">
 
                 <el-submenu v-if="item.items.length" :index="item.key" :key="item.key">
 
@@ -40,7 +40,7 @@ export default {
     name: "Test",
     data() {
         return {
-            NavigateItem: [
+            navigateItem: [
                 {
                     title: "首页",
                     key: "1",

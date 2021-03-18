@@ -31,7 +31,7 @@
                     <!-- 右侧 检测检测结果显示和输入栏  -->
                     <el-col :span="12">
 
-                        <div class="data-show">
+                        <div class="data-show" v-show="false">
                             <h1 v-show="false">第一次复检结果</h1>
                             <h1 v-show="false">第二次复检结果</h1>
                             <h1>确证检测结果</h1>
@@ -134,20 +134,21 @@
                         <div v-show="true" class="grid-content bg-purple-light detection-data-input-area">
                             <h1 v-show="true">第一次复检结果输入</h1>
                             <h1 v-show="false">第二次复检结果输入</h1>
-                            <el-form>
+                            <el-form :model="detectionRecord" :rules="rules" ref="sampleBasicInfo"
+                                     class="sample-info-form">
                                 <el-row>
                                     <el-col :span="6">
                                         <div class="grid-content bg-purple">检测方法</div>
                                     </el-col>
                                     <el-col :span="6">
-                                        <el-input v-model="detectionRecords.detectionMethod"></el-input>
+                                        <el-input v-model="detectionRecord.detectionMethod"></el-input>
                                     </el-col>
                                     <el-col :span="6">
                                         <div class="grid-content bg-purple">检测日期</div>
                                     </el-col>
                                     <el-col :span="6">
                                         <el-date-picker
-                                                v-model="detectionRecords.detectionDate"
+                                                v-model="detectionRecord.detectionDate"
                                                 align="left"
                                                 type="date"
                                                 placeholder="选择日期"
@@ -162,13 +163,13 @@
                                         <div class="grid-content bg-purple">试剂厂家</div>
                                     </el-col>
                                     <el-col :span="6">
-                                        <el-input v-model="detectionRecords.reagentsAndManufacturers"></el-input>
+                                        <el-input v-model="detectionRecord.reagentsAndManufacturers"></el-input>
                                     </el-col>
                                     <el-col :span="6">
                                         <div class="grid-content bg-purple">批号</div>
                                     </el-col>
                                     <el-col :span="6">
-                                        <el-input v-model="detectionRecords.batchNumber"></el-input>
+                                        <el-input v-model="detectionRecord.batchNumber"></el-input>
                                     </el-col>
                                 </el-row>
 
@@ -178,7 +179,7 @@
                                     </el-col>
                                     <el-col :span="6">
                                         <el-date-picker
-                                                v-model="detectionRecords.effectiveDate"
+                                                v-model="detectionRecord.effectiveDate"
                                                 align="left"
                                                 type="date"
                                                 placeholder="选择日期"
@@ -190,7 +191,7 @@
                                         <div class="grid-content bg-purple">检测结果</div>
                                     </el-col>
                                     <el-col :span="6">
-                                        <el-select v-model="detectionRecords.testResults" placeholder="请选择">
+                                        <el-select v-model="detectionRecord.testResults" placeholder="请选择">
                                             <el-option
                                                     v-for="item in testResults"
                                                     :key="item.value"
@@ -206,7 +207,7 @@
                                         <div class="grid-content bg-purple">检测结论</div>
                                     </el-col>
                                     <el-col :span="6">
-                                        <el-select v-model="detectionRecords.conclusion" placeholder="请选择">
+                                        <el-select v-model="detectionRecord.conclusion" placeholder="请选择">
                                             <el-option
                                                     v-for="item in conclusions"
                                                     :key="item.value"
@@ -219,8 +220,10 @@
 
                                 <el-row>
                                     <el-col :span="24">
+
                                         <div class="text-align-right">
                                             本次检测结果输入人：{{ username }}
+                                            <el-button type="primary" @click="submitForm('sampleBasicInfo')">保存</el-button>
                                         </div>
                                     </el-col>
 
@@ -270,7 +273,18 @@
                         testResults: '',
                         conclusion: '',
                     }],
-
+                detectionRecord:{
+                    acceptanceNumber:'',
+                    detectionMethod: '22',
+                    detectionDate: '',
+                    reagentsAndManufacturers: '',
+                    batchNumber: '',
+                    effectiveDate: '',
+                    testResults: '',
+                    conclusion: '',
+                    inspectorAccountID:'',
+                    inspectorName:'',
+                },
                 testResults: [{
                     value: '有反应',
                     label: '有反应'
@@ -289,6 +303,7 @@
                     label: 'HIV感染待确定'
                 },
                 ],
+
                 rules: {},
                 pickerOptions: {
                     disabledDate(time) {
@@ -316,6 +331,30 @@
                     }]
                 }
             }
+        },
+        methods: {
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+
+                        this.detectionRecord.acceptanceNumber = sessionStorage.getItem("acceptanceNumber")
+
+                        this.detectionRecord.inspectorName = this.$store.getters.getUser.username
+                        this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
+                        const _this = this;
+                        console.log(this.detectionRecord)
+
+                        this.$axios.post("/detectionRecords/save", this.detectionRecord).then(res => {
+                                alert(res.data.msg);
+                                console.log(res.data);
+                            }
+                        )
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
         },
         created() {
             // this.$axios.get("/detectionRecords/selectAll").then(res => {

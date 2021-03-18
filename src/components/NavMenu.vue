@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-menu
-            :default-active="this.$route.path"
+            :default-active="'/'+this.$route.path.split('/')[1]"
             router
             mode="horizontal"
             @select="handleSelect"
@@ -49,13 +49,19 @@ export default {
             navigateItem: [
                 {
                     title: "首页",
-                    key: "/",
+                    key: "/Index",
                     path: "",
                     items: [],
                 },
                 {
                     title: "录入样品信息",
                     key: "/SampleInput",
+                    path: "",
+                    items: [],
+                },
+                {
+                    title: "查看样品信息",
+                    key: "/ViewSampleInfo",
                     path: "",
                     items: [],
                 },
@@ -67,17 +73,17 @@ export default {
                 },
                 {
                     title: "导出报表",
-                    key: "/DetectionDataInput",
+                    key: "",
                     path: "",
                     items: [
                         {
                             title: "导出A表",
-                            key: "/DetectionDataInput",
+                            key: "",
                             path: "",
                         },
                         {
                             title: "导出B表",
-                            key: "/SampleInput",
+                            key: "",
                             path: "",
                         },
                     ],
@@ -95,7 +101,7 @@ export default {
                 }
             }).then((res) => {
                 _this.$store.commit('REMOVE_INFO')
-                _this.$router.push('/')
+                _this.$router.push('/Login')
             });
         },
         handleSelect(key, keyPath) {
@@ -105,6 +111,9 @@ export default {
 
     },
     created() {
+        console.log(this.$route.path.split('/')[1]);
+        console.log("打印token：" + localStorage.getItem("token"))
+
         if (this.$store.getters.getUser.username) {
             console.log(this.$store.getters.getUser.username)
             this.username = this.$store.getters.getUser.username
