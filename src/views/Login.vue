@@ -4,7 +4,7 @@
             <el-header id="login-el-header">
                 <h1>HIV 抗 体 检 测 中 心</h1>
             </el-header>
-            <el-main>
+        <el-main>
                 <!--
 
                     :model 的 userForm 和 v-model 的 userForm 一致

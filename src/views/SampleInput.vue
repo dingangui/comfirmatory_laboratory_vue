@@ -32,12 +32,12 @@
                                 <div class="grid-content bg-purple-light">
                                     <el-form-item label="送检日期" prop="inspectionDate">
                                         <el-date-picker
-                                                v-model="sampleBasicInfo.inspectionDate"
-                                                align="left"
-                                                type="date"
-                                                placeholder="选择日期"
-                                                size="large"
-                                                :picker-options="pickerOptions">
+                                            v-model="sampleBasicInfo.inspectionDate"
+                                            align="left"
+                                            type="date"
+                                            placeholder="选择日期"
+                                            size="large"
+                                            :picker-options="pickerOptions">
                                         </el-date-picker>
                                     </el-form-item>
                                 </div>
@@ -81,10 +81,10 @@
                                     <el-form-item label="性别" prop="sex">
                                         <el-select v-model="sampleBasicInfo.sex" placeholder="请选择">
                                             <el-option
-                                                    v-for="item in options"
-                                                    :key="item.value"
-                                                    :label="item.label"
-                                                    :value="item.value">
+                                                v-for="item in options"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
@@ -160,8 +160,7 @@
 
                     <div v-show="true" class="grid-content bg-purple-light detection-data-input-area">
                         <h1 v-show="true">筛查实验室筛查检测结果录入</h1>
-                        <el-form :model="detectionRecord" :rules="rules" ref="detectionRecord"
-                                 class="sample-info-form">
+                        <el-form :model="detectionRecord" :rules="rules" ref="detectionRecord">
                             <el-row>
                                 <el-col :span="6">
                                     <div class="grid-content bg-purple">检测方法</div>
@@ -174,12 +173,12 @@
                                 </el-col>
                                 <el-col :span="6">
                                     <el-date-picker
-                                            v-model="detectionRecord.detectionDate"
-                                            align="left"
-                                            type="date"
-                                            placeholder="选择日期"
-                                            size="large"
-                                            :picker-options="pickerOptions">
+                                        v-model="detectionRecord.detectionDate"
+                                        align="left"
+                                        type="date"
+                                        placeholder="选择日期"
+                                        size="large"
+                                        :picker-options="pickerOptions">
                                     </el-date-picker>
                                 </el-col>
                             </el-row>
@@ -205,12 +204,12 @@
                                 </el-col>
                                 <el-col :span="6">
                                     <el-date-picker
-                                            v-model="detectionRecord.effectiveDate"
-                                            align="left"
-                                            type="date"
-                                            placeholder="选择日期"
-                                            size="large"
-                                            :picker-options="pickerOptions">
+                                        v-model="detectionRecord.effectiveDate"
+                                        align="left"
+                                        type="date"
+                                        placeholder="选择日期"
+                                        size="large"
+                                        :picker-options="pickerOptions">
                                     </el-date-picker>
                                 </el-col>
                                 <el-col :span="6">
@@ -219,10 +218,10 @@
                                 <el-col :span="6">
                                     <el-select v-model="detectionRecord.testResult" placeholder="请选择">
                                         <el-option
-                                                v-for="item in testResult"
-                                                :key="item.value"
-                                                :label="item.label"
-                                                :value="item.value">
+                                            v-for="item in testResult"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
                                         </el-option>
                                     </el-select>
                                 </el-col>
@@ -235,10 +234,10 @@
                                 <el-col :span="6">
                                     <el-select v-model="detectionRecord.conclusion" placeholder="请选择">
                                         <el-option
-                                                v-for="item in conclusions"
-                                                :key="item.value"
-                                                :label="item.label"
-                                                :value="item.value">
+                                            v-for="item in conclusions"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
                                         </el-option>
                                     </el-select>
                                 </el-col>
@@ -254,7 +253,9 @@
 
                             </el-row>
                             <el-form-item>
-                                <el-button type="primary" @click="submitForm('sampleBasicInfo','detectionRecord')"> 保 存 </el-button>
+                                <el-button type="primary" @click="submitForm('sampleBasicInfo','detectionRecord')"> 保
+                                    存
+                                </el-button>
                             </el-form-item>
                         </el-form>
 
@@ -268,170 +269,167 @@
 
 <script>
 
-    import NavMenu from "@/components/NavMenu";
+import NavMenu from "@/components/NavMenu";
 
-    export default {
+export default {
 
-        name: "SampleInput",
-        components: {NavMenu},
-        data() {
-            return {
-                sampleBasicInfo: {
-                    inspectionUnit: '第一医院',
-                    inspectionDate: '2021-03-19',
-                    sampleType: '血液',
-                    inspectedType: '门诊',
-                    name: '王铅华',
-                    sex: '男',
-                    age: '29',
-                    profession: '工人',
-                    country: '中国',
-                    nation: '汉',
-                    marriage: '已婚',
-                    educationalLevel: '高中',
-                    IDNumber: '155547196805232241',
-                    phone: '18566589632',
-                    presentAddress: '河北省邢台市XX村',
-                    residenceAddress: '四川省攀枝花市XX镇',
-                    dataEntryStaffName:'',
-                    dataEntryStaffAccountID:''
-                },
-                detectionRecord:{
-                    acceptanceNumber:'',
-                    detectionMethod: 'ELISA',
-                    detectionDate: '2021-03-19',
-                    reagentsAndManufacturers: '哈药六厂',
-                    batchNumber: '990011',
-                    effectiveDate: '2021-02-11',
-                    testResult: '有反应',
-                    conclusion: 'HIV抗体阳性',
-                    inspectorAccountID:'',
-                    inspectorName:'',
-                },
-                acceptanceNumber: '',
-                testResult: [{
-                    value: '有反应',
-                    label: '有反应'
-                }, {
-                    value: '无反应',
-                    label: '无反应'
-                }],
-                conclusions: [{
-                    value: 'HIV抗体阴性',
-                    label: 'HIV抗体阴性'
-                }, {
-                    value: 'HIV抗体阳性',
-                    label: 'HIV抗体阳性'
-                }, {
-                    value: 'HIV感染待确定',
-                    label: 'HIV感染待确定'
-                },
-                ],
-                options: [{
-                    value: '男',
-                    label: '男'
-                }, {
-                    value: '女',
-                    label: '女'
-                }],
-
-                rules: {
-                    name: [
-                        {required: true, message: '请输入姓名', trigger: 'blur'},
-                    ]
-                },
-                pickerOptions: {
-                    disabledDate(time) {
-                        return time.getTime() > Date.now();
-                    },
-                    shortcuts: [{
-                        text: '今天',
-                        onClick(picker) {
-                            picker.$emit('pick', new Date());
-                        }
-                    }, {
-                        text: '昨天',
-                        onClick(picker) {
-                            const date = new Date();
-                            date.setTime(date.getTime() - 3600 * 1000 * 24);
-                            picker.$emit('pick', date);
-                        }
-                    }, {
-                        text: '一周前',
-                        onClick(picker) {
-                            const date = new Date();
-                            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-                            picker.$emit('pick', date);
-                        }
-                    }]
-                }
-            };
-        },
-        methods: {
-            submitForm(sampleInfo, detectionRecord) {
-                this.$refs[detectionRecord].validate((valid) => {
-                    if (valid) {
-                        this.detectionRecord.inspectorName = this.$store.getters.getUser.username
-                        this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
-                        this.detectionRecord.acceptanceNumber = this.acceptanceNumber
-
-                        const _this = this;
-
-                        this.$axios.post("/detectionRecord/save", this.detectionRecord).then(res => {
-                                alert(res.data.msg);
-                                console.log(res.data);
-                            }
-                        )
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-                this.$refs[sampleInfo].validate((valid) => {
-                    if (valid) {
-                        this.sampleBasicInfo.acceptanceNumber = this.acceptanceNumber
-
-                        this.sampleBasicInfo.dataEntryStaffName = this.$store.getters.getUser.username
-                        this.sampleBasicInfo.dataEntryStaffAccountID = this.$store.getters.getUser.id
-                        const _this = this;
-                        // alert('提交成功!');
-                        /*
-                        * post 中的 this.sampleBasicInfo 表示 post 提交到对应链接时的内容
-                        * res 是从链接返回来的数据
-                        *
-                        * 引入 axios.js 后，就可以不用在 url 中写上 http://localhost:5000 了
-                        * 引入 axios.js 需要 在main.js 中 import "./axios"
-                        * */
-                        this.$axios.post("/sampleBasicInfo/save", this.sampleBasicInfo).then(res => {
-                                alert(res.data.msg);
-                                console.log(res.data);
-                                _this.$router.push("/SampleInfoUpdate/" + _this.acceptanceNumber);
-                                _this.$store.commit("")
-                            }
-                        )
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-
+    name: "SampleInput",
+    components: {NavMenu},
+    data() {
+        return {
+            sampleBasicInfo: {
+                inspectionUnit: '第一医院',
+                inspectionDate: '2021-03-19',
+                sampleType: '血液',
+                inspectedType: '门诊',
+                name: '王铅华',
+                sex: '男',
+                age: '29',
+                profession: '工人',
+                country: '中国',
+                nation: '汉',
+                marriage: '已婚',
+                educationalLevel: '高中',
+                IDNumber: '155547196805232241',
+                phone: '18566589632',
+                presentAddress: '河北省邢台市XX村',
+                residenceAddress: '四川省攀枝花市XX镇',
+                dataEntryStaffName: '',
+                dataEntryStaffAccountID: ''
             },
-            resetForm(formName) {
-                this.$refs[formName].resetFields();
+            detectionRecord: {
+                acceptanceNumber: '',
+                detectionMethod: 'ELISA',
+                detectionDate: '2021-03-19',
+                reagentsAndManufacturers: '哈药六厂',
+                batchNumber: '990011',
+                effectiveDate: '2021-02-11',
+                testResult: '有反应',
+                conclusion: 'HIV抗体阳性',
+                inspectorAccountID: '',
+                inspectorName: '',
+            },
+            acceptanceNumber: '',
+            testResult: [{
+                value: '有反应',
+                label: '有反应'
+            }, {
+                value: '无反应',
+                label: '无反应'
+            }],
+            conclusions: [{
+                value: 'HIV抗体阴性',
+                label: 'HIV抗体阴性'
+            }, {
+                value: 'HIV抗体阳性',
+                label: 'HIV抗体阳性'
+            }, {
+                value: 'HIV感染待确定',
+                label: 'HIV感染待确定'
+            },
+            ],
+            options: [{
+                value: '男',
+                label: '男'
+            }, {
+                value: '女',
+                label: '女'
+            }],
+
+            rules: {
+                name: [
+                    {required: true, message: '请输入姓名', trigger: 'blur'},
+                ]
+            },
+            pickerOptions: {
+                disabledDate(time) {
+                    return time.getTime() > Date.now();
+                },
+                shortcuts: [{
+                    text: '今天',
+                    onClick(picker) {
+                        picker.$emit('pick', new Date());
+                    }
+                }, {
+                    text: '昨天',
+                    onClick(picker) {
+                        const date = new Date();
+                        date.setTime(date.getTime() - 3600 * 1000 * 24);
+                        picker.$emit('pick', date);
+                    }
+                }, {
+                    text: '一周前',
+                    onClick(picker) {
+                        const date = new Date();
+                        date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                        picker.$emit('pick', date);
+                    }
+                }]
             }
-        },
-        created() {
-            const _this = this
-            this.$axios.get("/sampleBasicInfo/getAcceptanceNumber").then(res => {
-                    _this.acceptanceNumber = res.data.data;
+        };
+    },
+    methods: {
+        submitForm(sampleInfo, detectionRecord) {
+            this.$refs[detectionRecord].validate((valid) => {
+                if (valid) {
+                    this.detectionRecord.inspectorName = this.$store.getters.getUser.username
+                    this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
+                    this.detectionRecord.acceptanceNumber = this.acceptanceNumber
+
+                    const _this = this;
+
+                    this.$axios.post("/detectionRecord/save", this.detectionRecord).then(res => {
+                            console.log(res.data);
+                        }
+                    )
+                } else {
+                    console.log('error submit!!');
+                    return false;
                 }
-            )
-            if (this.$store.getters.getUser.username) {
-                console.log(this.$store.getters.getUser.username)
-                this.username = this.$store.getters.getUser.username
+            });
+            this.$refs[sampleInfo].validate((valid) => {
+                if (valid) {
+                    this.sampleBasicInfo.acceptanceNumber = this.acceptanceNumber
+                    this.sampleBasicInfo.dataEntryStaffName = this.$store.getters.getUser.username
+                    this.sampleBasicInfo.dataEntryStaffAccountID = this.$store.getters.getUser.id
+                    const _this = this;
+                    // alert('提交成功!');
+                    /*
+                    * post 中的 this.sampleBasicInfo 表示 post 提交到对应链接时的内容
+                    * res 是从链接返回来的数据
+                    *
+                    * 引入 axios.js 后，就可以不用在 url 中写上 http://localhost:5000 了
+                    * 引入 axios.js 需要 在main.js 中 import "./axios"
+                    * */
+                    this.$axios.post("/sampleBasicInfo/save", this.sampleBasicInfo).then(res => {
+                            alert(res.data.msg);
+                            console.log(res.data);
+                            _this.$router.push("/SampleInfoUpdate/" + _this.acceptanceNumber);
+                        }
+                    )
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
+
+        },
+        resetForm(formName) {
+            this.$refs[formName].resetFields();
+        }
+    },
+    created() {
+        const _this = this
+        this.$axios.get("/sampleBasicInfo/getAcceptanceNumber").then(res => {
+                _this.acceptanceNumber = res.data.data;
             }
+        )
+        if (this.$store.getters.getUser.username) {
+            console.log(this.$store.getters.getUser.username)
+            this.username = this.$store.getters.getUser.username
         }
     }
+}
 </script>
 
 <style scoped>

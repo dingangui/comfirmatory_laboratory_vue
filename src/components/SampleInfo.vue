@@ -262,13 +262,13 @@
         created() {
             const _this = this
             const acceptanceNumber = sessionStorage.getItem("acceptanceNumber");
-            this.$axios.get("/sampleBasicInfo/getSampleInfoByAcceptanceNumber/" + acceptanceNumber).then(res => {
+            this.$axios.get("/sampleBasicInfo/getSampleInfo/" + acceptanceNumber).then(res => {
                     console.log(res.data.data)
                     _this.sampleBasicInfo = res.data.data
                 }
             )
 
-            this.$axios.get("/detectionRecord/getFirstDetectionRecordByAcceptanceNumber/"+acceptanceNumber).then(res => {
+            this.$axios.get("/detectionRecord/getFirstDetectionRecord/"+acceptanceNumber).then(res => {
                     console.log(res.data.data)
                     _this.detectionRecord = res.data.data
                 }
