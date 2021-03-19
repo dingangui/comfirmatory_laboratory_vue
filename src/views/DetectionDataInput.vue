@@ -102,7 +102,7 @@
                                     </el-col>
 
                                     <el-col :span="6">
-                                        <el-input readonly v-model="detectionRecords.testResults"></el-input>
+                                        <el-input readonly v-model="detectionRecords.testResult"></el-input>
                                     </el-col>
 
                                 </el-row>
@@ -124,7 +124,7 @@
                                     </el-col>
 
                                     <el-col :span="6">
-                                        <el-input readonly v-model="detectionRecords.testResults"></el-input>
+                                        <el-input readonly v-model="detectionRecords.testResult"></el-input>
                                     </el-col>
 
                                 </el-row>
@@ -191,9 +191,9 @@
                                         <div class="grid-content bg-purple">检测结果</div>
                                     </el-col>
                                     <el-col :span="6">
-                                        <el-select v-model="detectionRecord.testResults" placeholder="请选择">
+                                        <el-select v-model="detectionRecord.testResult" placeholder="请选择">
                                             <el-option
-                                                    v-for="item in testResults"
+                                                    v-for="item in testResult"
                                                     :key="item.value"
                                                     :label="item.label"
                                                     :value="item.value">
@@ -261,7 +261,7 @@
                     reagentsAndManufacturers: '',
                     batchNumber: '',
                     effectiveDate: '',
-                    testResults: '',
+                    testResult: '',
                     conclusion: '',
                 },
                     {
@@ -270,7 +270,7 @@
                         reagentsAndManufacturers: '',
                         batchNumber: '',
                         effectiveDate: '',
-                        testResults: '',
+                        testResult: '',
                         conclusion: '',
                     }],
                 detectionRecord:{
@@ -280,12 +280,12 @@
                     reagentsAndManufacturers: '',
                     batchNumber: '',
                     effectiveDate: '',
-                    testResults: '',
+                    testResult: '',
                     conclusion: '',
                     inspectorAccountID:'',
                     inspectorName:'',
                 },
-                testResults: [{
+                testResult: [{
                     value: '有反应',
                     label: '有反应'
                 }, {
@@ -344,7 +344,7 @@
                         const _this = this;
                         console.log(this.detectionRecord)
 
-                        this.$axios.post("/detectionRecords/save", this.detectionRecord).then(res => {
+                        this.$axios.post("/detectionRecord/save", this.detectionRecord).then(res => {
                                 alert(res.data.msg);
                                 console.log(res.data);
                             }
@@ -357,12 +357,12 @@
             },
         },
         created() {
-            // this.$axios.get("/detectionRecords/selectAll").then(res => {
-            //         console.log(res.data.data)
-            //         _this.sampleBasicInfo = res.data.data
-            //
-            //     }
-            // )
+            const _this = this;
+            this.$axios.get("/detectionRecord/getDetectionRecords", this.detectionRecord).then(res => {
+                    alert(res.data.msg);
+                    console.log(res.data);
+                }
+            )
             if (this.$store.getters.getUser.username) {
                 console.log(this.$store.getters.getUser.username)
                 this.username = this.$store.getters.getUser.username

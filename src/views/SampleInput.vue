@@ -154,11 +154,112 @@
                             <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
                         </el-form-item>
 
-                        <el-form-item>
-                            <el-button type="primary" @click="submitForm('sampleBasicInfo')">保存</el-button>
-                            <el-button @click="resetForm('sampleBasicInfo')">重置</el-button>
-                        </el-form-item>
+
                     </el-form>
+
+
+                    <div v-show="true" class="grid-content bg-purple-light detection-data-input-area">
+                        <h1 v-show="true">筛查实验室筛查检测结果录入</h1>
+                        <el-form :model="detectionRecord" :rules="rules" ref="detectionRecord"
+                                 class="sample-info-form">
+                            <el-row>
+                                <el-col :span="6">
+                                    <div class="grid-content bg-purple">检测方法</div>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-input v-model="detectionRecord.detectionMethod"></el-input>
+                                </el-col>
+                                <el-col :span="6">
+                                    <div class="grid-content bg-purple">检测日期</div>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-date-picker
+                                            v-model="detectionRecord.detectionDate"
+                                            align="left"
+                                            type="date"
+                                            placeholder="选择日期"
+                                            size="large"
+                                            :picker-options="pickerOptions">
+                                    </el-date-picker>
+                                </el-col>
+                            </el-row>
+
+                            <el-row>
+                                <el-col :span="6">
+                                    <div class="grid-content bg-purple">试剂厂家</div>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-input v-model="detectionRecord.reagentsAndManufacturers"></el-input>
+                                </el-col>
+                                <el-col :span="6">
+                                    <div class="grid-content bg-purple">批号</div>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-input v-model="detectionRecord.batchNumber"></el-input>
+                                </el-col>
+                            </el-row>
+
+                            <el-row>
+                                <el-col :span="6">
+                                    <div class="grid-content bg-purple">有效日期</div>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-date-picker
+                                            v-model="detectionRecord.effectiveDate"
+                                            align="left"
+                                            type="date"
+                                            placeholder="选择日期"
+                                            size="large"
+                                            :picker-options="pickerOptions">
+                                    </el-date-picker>
+                                </el-col>
+                                <el-col :span="6">
+                                    <div class="grid-content bg-purple">检测结果</div>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-select v-model="detectionRecord.testResult" placeholder="请选择">
+                                        <el-option
+                                                v-for="item in testResult"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-col>
+                            </el-row>
+
+                            <el-row>
+                                <el-col :span="6">
+                                    <div class="grid-content bg-purple">检测结论</div>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-select v-model="detectionRecord.conclusion" placeholder="请选择">
+                                        <el-option
+                                                v-for="item in conclusions"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-col>
+                            </el-row>
+
+                            <el-row>
+                                <el-col :span="24">
+
+                                    <div class="text-align-right">
+                                        本次检测结果输入人：{{ username }}
+                                    </div>
+                                </el-col>
+
+                            </el-row>
+                            <el-form-item>
+                                <el-button type="primary" @click="submitForm('sampleBasicInfo','detectionRecord')"> 保 存 </el-button>
+                            </el-form-item>
+                        </el-form>
+
+
+                    </div>
                 </div>
             </el-main>
         </el-container>
@@ -195,7 +296,37 @@
                     dataEntryStaffName:'',
                     dataEntryStaffAccountID:''
                 },
+                detectionRecord:{
+                    acceptanceNumber:'',
+                    detectionMethod: 'ELISA',
+                    detectionDate: '2021-03-19',
+                    reagentsAndManufacturers: '哈药六厂',
+                    batchNumber: '990011',
+                    effectiveDate: '2021-02-11',
+                    testResult: '有反应',
+                    conclusion: 'HIV抗体阳性',
+                    inspectorAccountID:'',
+                    inspectorName:'',
+                },
                 acceptanceNumber: '',
+                testResult: [{
+                    value: '有反应',
+                    label: '有反应'
+                }, {
+                    value: '无反应',
+                    label: '无反应'
+                }],
+                conclusions: [{
+                    value: 'HIV抗体阴性',
+                    label: 'HIV抗体阴性'
+                }, {
+                    value: 'HIV抗体阳性',
+                    label: 'HIV抗体阳性'
+                }, {
+                    value: 'HIV感染待确定',
+                    label: 'HIV感染待确定'
+                },
+                ],
                 options: [{
                     value: '男',
                     label: '男'
@@ -237,10 +368,29 @@
             };
         },
         methods: {
-            submitForm(formName) {
-
-                this.$refs[formName].validate((valid) => {
+            submitForm(sampleInfo, detectionRecord) {
+                this.$refs[detectionRecord].validate((valid) => {
                     if (valid) {
+                        this.detectionRecord.inspectorName = this.$store.getters.getUser.username
+                        this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
+                        this.detectionRecord.acceptanceNumber = this.acceptanceNumber
+
+                        const _this = this;
+
+                        this.$axios.post("/detectionRecord/save", this.detectionRecord).then(res => {
+                                alert(res.data.msg);
+                                console.log(res.data);
+                            }
+                        )
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+                this.$refs[sampleInfo].validate((valid) => {
+                    if (valid) {
+                        this.sampleBasicInfo.acceptanceNumber = this.acceptanceNumber
+
                         this.sampleBasicInfo.dataEntryStaffName = this.$store.getters.getUser.username
                         this.sampleBasicInfo.dataEntryStaffAccountID = this.$store.getters.getUser.id
                         const _this = this;
@@ -264,6 +414,7 @@
                         return false;
                     }
                 });
+
             },
             resetForm(formName) {
                 this.$refs[formName].resetFields();
@@ -275,6 +426,10 @@
                     _this.acceptanceNumber = res.data.data;
                 }
             )
+            if (this.$store.getters.getUser.username) {
+                console.log(this.$store.getters.getUser.username)
+                this.username = this.$store.getters.getUser.username
+            }
         }
     }
 </script>

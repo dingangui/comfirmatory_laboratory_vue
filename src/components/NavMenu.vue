@@ -66,6 +66,12 @@ export default {
                     items: [],
                 },
                 {
+                    title: "修改样品信息",
+                    key: "/SampleInfoUpdate",
+                    path: "",
+                    items: [],
+                },
+                {
                     title: "输入检测结果",
                     key: "/DetectionDataInput",
                     path: "",

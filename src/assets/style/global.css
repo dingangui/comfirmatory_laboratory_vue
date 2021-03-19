@@ -51,6 +51,9 @@ html, body {
     margin:0 25px;
 }
 
+#detectionMethod{
+    border-top: 2px solid #545c64;
+}
 .data-show .el-col{
     outline: 1px solid #545c64;
 /*    border-left: solid 2px #000;

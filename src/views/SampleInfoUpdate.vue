@@ -246,7 +246,7 @@
             const _this = this
             _this.acceptanceNumber = acceptanceNumber;
 
-            this.$axios.get("/sampleBasicInfo/getSampleInfoByAcceptanceNumber/" + acceptanceNumber).then(res => {
+            this.$axios.get("/sampleBasicInfo/getSampleInfo/" + acceptanceNumber).then(res => {
                     console.log(res.data.data)
                     _this.sampleBasicInfo = res.data.data
 

@@ -3,7 +3,7 @@
 
         <div class="data-show">
             <h1>HIV感染待确定报告</h1>
-            <div class="text-align-right">样品受理编号：{{ acceptanceNumber }}</div>
+            <div class="text-align-right">样品受理编号：{{ sampleBasicInfo.acceptanceNumber }}</div>
 
             <!-- 表单 快速填写样品基本信息 -->
             <div>
@@ -136,7 +136,7 @@
                     </el-row>
 
                     <!-- 第一行 -->
-                    <el-row>
+                    <el-row   id="detectionMethod">
 
                         <el-col :span="6">
                             <div class="grid-content bg-purple">检测方法</div>
@@ -144,7 +144,7 @@
 
                         <el-col :span="18">
                             <div class="grid-content bg-purple-light">
-                                <el-input readonly v-model="sampleBasicInfo.inspectionUnit"></el-input>
+                                <el-input readonly v-model="detectionRecord.detectionMethod"></el-input>
                             </div>
                         </el-col>
                     </el-row>
@@ -155,7 +155,7 @@
                         </el-col>
 
                         <el-col :span="18">
-                            <el-input readonly v-model="sampleBasicInfo.inspectionDate"></el-input>
+                            <el-input readonly v-model="detectionRecord.detectionDate"></el-input>
                         </el-col>
 
                         <!--第一行-->
@@ -170,7 +170,7 @@
 
                         <el-col :span="18">
                             <div class="grid-content bg-purple-light">
-                                <el-input readonly v-model="sampleBasicInfo.inspectionUnit"></el-input>
+                                <el-input readonly v-model="detectionRecord.reagentsAndManufacturers"></el-input>
                             </div>
                         </el-col>
                     </el-row>
@@ -181,7 +181,7 @@
                         </el-col>
 
                         <el-col :span="18">
-                            <el-input readonly v-model="sampleBasicInfo.inspectionDate"></el-input>
+                            <el-input readonly v-model="detectionRecord.batchNumber"></el-input>
                         </el-col>
 
                     </el-row>
@@ -194,7 +194,7 @@
 
                         <el-col :span="18">
                             <div class="grid-content bg-purple-light">
-                                <el-input readonly v-model="sampleBasicInfo.inspectionUnit"></el-input>
+                                <el-input readonly v-model="detectionRecord.effectiveDate"></el-input>
                             </div>
                         </el-col>
                     </el-row>
@@ -205,7 +205,7 @@
                         </el-col>
 
                         <el-col :span="18">
-                            <el-input readonly v-model="sampleBasicInfo.inspectionDate"></el-input>
+                            <el-input readonly v-model="detectionRecord.testResult"></el-input>
                         </el-col>
 
                         <!--第一行-->
@@ -220,7 +220,7 @@
 
                         <el-col :span="18">
                             <div class="grid-content bg-purple-light">
-                                <el-input readonly v-model="sampleBasicInfo.inspectionUnit"></el-input>
+                                <el-input readonly v-model="detectionRecord.conclusion"></el-input>
                             </div>
                         </el-col>
                     </el-row>
@@ -231,13 +231,13 @@
                             <div class="grid-content bg-purple">检测者</div>
                         </el-col>
                         <el-col :span="6">
-                            <el-input readonly v-model="sampleBasicInfo.dataEntryStaffName"></el-input>
+                            <el-input readonly v-model="detectionRecord.inspectorName"></el-input>
                         </el-col>
                         <el-col :span="6">
                             <div class="grid-content bg-purple">审核者</div>
                         </el-col>
                         <el-col :span="6">
-                            <el-input readonly v-model="sampleBasicInfo.dataEntryStaffName"></el-input>
+                            <el-input readonly v-model="detectionRecord.reviewerName"></el-input>
                         </el-col>
                     </el-row>
                     <!-- 表单 快速填写样品基本信息 -->
@@ -253,20 +253,26 @@
         data() {
             return {
                 sampleBasicInfo: {},
+                detectionRecord: {
+                    reviewerName:''
+                },
                 rules: {}
             }
         },
         created() {
             const _this = this
             const acceptanceNumber = sessionStorage.getItem("acceptanceNumber");
-            console.log(acceptanceNumber)
-            this.acceptanceNumber =acceptanceNumber;
             this.$axios.get("/sampleBasicInfo/getSampleInfoByAcceptanceNumber/" + acceptanceNumber).then(res => {
                     console.log(res.data.data)
                     _this.sampleBasicInfo = res.data.data
                 }
             )
 
+            this.$axios.get("/detectionRecord/getFirstDetectionRecordByAcceptanceNumber/"+acceptanceNumber).then(res => {
+                    console.log(res.data.data)
+                    _this.detectionRecord = res.data.data
+                }
+            )
 
         }
     }
