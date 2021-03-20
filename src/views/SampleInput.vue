@@ -370,25 +370,11 @@ export default {
     },
     methods: {
         submitForm(sampleInfo, detectionRecord) {
-            this.$refs[detectionRecord].validate((valid) => {
-                if (valid) {
-                    this.detectionRecord.inspectorName = this.$store.getters.getUser.username
-                    this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
-                    this.detectionRecord.acceptanceNumber = this.acceptanceNumber
 
-                    const _this = this;
-
-                    this.$axios.post("/detectionRecord/save", this.detectionRecord).then(res => {
-                            console.log(res.data);
-                        }
-                    )
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
             this.$refs[sampleInfo].validate((valid) => {
                 if (valid) {
+
+
                     this.sampleBasicInfo.acceptanceNumber = this.acceptanceNumber
                     this.sampleBasicInfo.dataEntryStaffName = this.$store.getters.getUser.username
                     this.sampleBasicInfo.dataEntryStaffAccountID = this.$store.getters.getUser.id
@@ -402,13 +388,33 @@ export default {
                     * 引入 axios.js 需要 在main.js 中 import "./axios"
                     * */
                     this.$axios.post("/sampleBasicInfo/save", this.sampleBasicInfo).then(res => {
-                            alert(res.data.msg);
-                            console.log(res.data);
-                            _this.$router.push("/SampleInfoUpdate/" + _this.acceptanceNumber);
+                            console.log(res.data.msg);
+                            // console.log(res.data);
                         }
                     )
                 } else {
-                    console.log('error submit!!');
+                    alert('error submit!!');
+                    return false;
+                }
+            });
+
+            this.$refs[detectionRecord].validate((valid) => {
+                if (valid) {
+                    this.detectionRecord.inspectorName = this.$store.getters.getUser.username
+                    this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
+                    this.detectionRecord.acceptanceNumber = this.acceptanceNumber
+
+                    sessionStorage.setItem("acceptanceNumber", this.acceptanceNumber)
+
+                    const _this = this;
+
+                    this.$axios.post("/detectionRecord/save", this.detectionRecord).then(res => {
+                            alert(res.data.msg);
+                            _this.$router.push("/DetectionDataInput/" + _this.acceptanceNumber);
+                        }
+                    )
+                } else {
+                    alert('error submit!!');
                     return false;
                 }
             });
@@ -425,7 +431,6 @@ export default {
             }
         )
         if (this.$store.getters.getUser.username) {
-            console.log(this.$store.getters.getUser.username)
             this.username = this.$store.getters.getUser.username
         }
     }

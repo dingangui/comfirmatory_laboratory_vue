@@ -98,7 +98,14 @@ export default {
             if(flag === 'waitingForTest'){
                 sessionStorage.setItem("acceptanceNumber",acceptanceNumber);
                 this.$router.push("/DetectionDataInput/"+acceptanceNumber);
-
+            }
+            if(flag === 'waitingForReview'){
+                sessionStorage.setItem("acceptanceNumber",acceptanceNumber);
+                this.$router.push("/DetectionDataReview/"+acceptanceNumber);
+            }
+            if(flag === 'waitingForOutput'){
+                sessionStorage.setItem("acceptanceNumber",acceptanceNumber);
+                this.$router.push("/FormOutput/"+acceptanceNumber);
             }
         }
     },
@@ -106,8 +113,6 @@ export default {
         const _this = this;
         this.$axios.get("/sampleBasicInfo/getAllOperableSampleList").then(res => {
             _this.sampleLists = res.data.data
-            console.log(res.data.data)
-
         })
     }
 }

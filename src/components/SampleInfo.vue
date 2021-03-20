@@ -136,7 +136,7 @@
                     </el-row>
 
                     <!-- 第一行 -->
-                    <el-row   id="detectionMethod">
+                    <el-row  id="detectionMethod">
 
                         <el-col :span="6">
                             <div class="grid-content bg-purple">检测方法</div>

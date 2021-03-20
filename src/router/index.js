@@ -8,6 +8,7 @@ import SampleInfoUpdate from "@/views/SampleInfoUpdate";
 import DetectionDataInput from "@/views/DetectionDataInput";
 import Test from "@/views/Test";
 import Index from "@/views/Index";
+import DetectionDataReview from "@/views/DetectionDataReview";
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,11 @@ const routes = [
     path: '/DetectionDataInput/:AcceptanceNumber',
     name: 'DetectionDataInput',
     component: DetectionDataInput
+  },
+  {
+    path: '/DetectionDataReview/:AcceptanceNumber',
+    name: 'DetectionDataReview',
+    component: DetectionDataReview
   },
   {
     path: '/Test',

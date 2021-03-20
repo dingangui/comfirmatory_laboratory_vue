@@ -72,6 +72,12 @@ export default {
                     items: [],
                 },
                 {
+                    title: "审核样品信息",
+                    key: "/DetectionDataReview",
+                    path: "",
+                    items: [],
+                },
+                {
                     title: "输入检测结果",
                     key: "/DetectionDataInput",
                     path: "",
@@ -111,17 +117,18 @@ export default {
             });
         },
         handleSelect(key, keyPath) {
-            console.log("handle selected: " + key + " " + keyPath);
+            // console.log("handle selected: " + key + " " + keyPath);
             this.$router.push(key);
         },
 
     },
     created() {
+/*
         console.log(this.$route.path.split('/')[1]);
         console.log("打印token：" + localStorage.getItem("token"))
+*/
 
         if (this.$store.getters.getUser.username) {
-            console.log(this.$store.getters.getUser.username)
             this.username = this.$store.getters.getUser.username
         }
     }
