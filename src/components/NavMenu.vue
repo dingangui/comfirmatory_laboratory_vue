@@ -58,7 +58,7 @@ export default {
                     key: "/SampleInput",
                     path: "",
                     items: [],
-                },
+                }/*,
                 {
                     title: "查看样品信息",
                     key: "/ViewSampleInfo",
@@ -70,7 +70,7 @@ export default {
                     key: "/SampleInfoUpdate",
                     path: "",
                     items: [],
-                },
+                }*/,
                 {
                     title: "审核样品信息",
                     key: "/DetectionDataReview",
@@ -117,8 +117,8 @@ export default {
             });
         },
         handleSelect(key, keyPath) {
-            // console.log("handle selected: " + key + " " + keyPath);
-            this.$router.push(key);
+            // console.log( key,keyPath);
+            // this.$router.push(key);
         },
 
     },
@@ -127,7 +127,6 @@ export default {
         console.log(this.$route.path.split('/')[1]);
         console.log("打印token：" + localStorage.getItem("token"))
 */
-
         if (this.$store.getters.getUser.username) {
             this.username = this.$store.getters.getUser.username
         }

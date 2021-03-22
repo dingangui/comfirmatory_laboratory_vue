@@ -2,15 +2,14 @@
     <div>
         <!--显示结果的部分-->
         <div v-for="detectionRecord in detectionRecords" class="data-show" v-if="detectionRecord.sequence > 1">
-            <h1 v-if="detectionRecord.sequence === 2">第一次复检结果</h1>
-            <h1 v-if="detectionRecord.sequence === 3">第二次复检结果</h1>
-            <h1 v-if="detectionRecord.sequence === 4">确证检测结果</h1>
+            <h2 v-if="detectionRecord.sequence === 2">第一次复检结果</h2>
+            <h2 v-if="detectionRecord.sequence === 3">第二次复检结果</h2>
+            <h2 v-if="detectionRecord.sequence === 4">确证检测结果</h2>
             <!-- 表单 快速填写样品基本信息 -->
             <el-form>
 
                 <!-- 第一行 -->
                 <el-row>
-
                     <el-col :span="6">
                         <div class="grid-content bg-purple">检测方法</div>
                     </el-col>
@@ -85,7 +84,8 @@
 
                     <el-col :span="6">
                         <div class="grid-content bg-purple-light">
-                            {{detectionRecord.conclusion}}
+                            <span class="unreviewed" v-if="detectionRecord.reviewerName === null">该结果未审核</span>
+                            <span class="reviewed" v-else>{{detectionRecord.conclusion}}</span>
                         </div>
                     </el-col>
 
@@ -116,7 +116,7 @@
                     </el-col>
 
                     <el-col :span="6">
-                        <span v-if="detectionRecord.reviewerName === null">该结果未审核</span>
+                        <span class="unreviewed" v-if="detectionRecord.reviewerName === null">该结果未审核</span>
                         {{detectionRecord.reviewerName}}
                     </el-col>
 

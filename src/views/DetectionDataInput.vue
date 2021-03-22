@@ -1,6 +1,8 @@
+<link rel="stylesheet" href="../assets/style/global.css">
 <template>
     <!--  最外层 div -->
     <div>
+
         <!-- 最外层 div 内负责布局管理的 -->
         <el-container>
 
@@ -10,7 +12,23 @@
             </el-header>
             <!-- 负责布局管理，内部分为左右各一半两个区域 -->
 
-            <el-main>
+            <!--
+
+            主区域分为两类，
+            当路径是 /DetectionDataInput 时，此时，路径通过 '/' 分隔符分开，长度为2
+                显示可检测样品的列表
+
+            当路径是 /DetectionDataInput/A2021 - x 时，此时，路径通过 '/' 分隔符分开，长度为3
+                显示具体检测数据的表格
+
+            -->
+            <!-- 显示可检测样品的列表  -->
+            <el-main v-if="this.$route.path.split('/').length === 2">
+                <SampleList></SampleList>
+            </el-main>
+
+            <!-- 显示具体检测数据的表格  -->
+            <el-main v-else>
                 <!-- 最外层 div 内负责布局管理的，分为导航栏和主区域 -->
                 <el-row>
 
@@ -29,7 +47,7 @@
 
 
                     <!-- 右侧 检测检测结果显示和输入栏  -->
-                    <el-col :span="12">
+                    <el-col class="el-main-right-side" :span="12">
 
                         <DetectionRecords></DetectionRecords>
                         <!--输入结果的部分-->
@@ -37,17 +55,24 @@
                         <!--当状态不是 waitingForTest 时，不显示输入检测结果的表格 -->
                         <div v-if="testTime < 4 && flag ==='waitingForTest'"
                              class="grid-content bg-purple-light detection-data-input-area">
-                            <h1 v-if="testTime === 1">第一次复检结果输入</h1>
-                            <h1 v-if="testTime === 2">第二次复检结果输入</h1>
-                            <h1 v-if="testTime === 3">确证检测结果输入</h1>
-                            <el-form :model="detectionRecord" :rules="rules" ref="detectionRecord">
+                            <h2 v-if="testTime === 1">第一次复检结果输入</h2>
+                            <h2 v-if="testTime === 2">第二次复检结果输入</h2>
+                            <h2 v-if="testTime === 3">确证检测结果输入</h2>
+                            <el-form :model="detectionRecord"
+                                     :rules="rules"
+                                     ref="detectionRecord">
                                 <el-row>
-                                    <el-col :span="6">
-                                        <div class="grid-content bg-purple">检测方法</div>
+                                    <el-col :span="12">
+                                        <el-form-item prop="detectionMethod">
+                                            <el-col :span="12">
+                                                <div class="grid-content bg-purple">检测日期</div>
+                                            </el-col>
+                                            <el-col :span="12">
+                                                <el-input v-model="detectionRecord.detectionMethod"></el-input>
+                                            </el-col>
+                                        </el-form-item>
                                     </el-col>
-                                    <el-col :span="6">
-                                        <el-input v-model="detectionRecord.detectionMethod"></el-input>
-                                    </el-col>
+
                                     <el-col :span="6">
                                         <div class="grid-content bg-purple">检测日期</div>
                                     </el-col>
@@ -160,10 +185,11 @@
 import NavMenu from "@/components/NavMenu";
 import SampleInfo from "@/components/SampleInfo";
 import DetectionRecords from "@/components/DetectionRecords";
+import SampleList from "@/views/SampleList";
 
 export default {
     name: "DetectionDataInput",
-    components: {NavMenu, SampleInfo, DetectionRecords},
+    components: {NavMenu, SampleInfo, DetectionRecords, SampleList},
     inject: ['reload'],
     data() {
         return {
@@ -177,7 +203,7 @@ export default {
                 reagentsAndManufacturers: '哈药六厂',
                 batchNumber: '990011',
                 effectiveDate: '2021-02-11',
-                testResult: '有反应',
+                testResult: '',
                 inspectorAccountID: '',
                 inspectorName: '',
             },
@@ -208,7 +234,21 @@ export default {
                 }
             ],
 
-            rules: {},
+            rules: {
+                detectionMethod: [
+                    {required: true, message: '请选择检测方法', trigger: 'change'},
+                ], detectionDate: [
+                    {required: true, message: '请选择检测日期', trigger: 'change'},
+                ], reagentsAndManufacturers: [
+                    {required: true, message: '请选择试剂厂家', trigger: 'change'},
+                ], batchNumber: [
+                    {required: true, message: '请选择批号', trigger: 'change'},
+                ], effectiveDate: [
+                    {required: true, message: '请选择有效日期', trigger: 'change'},
+                ], testResult: [
+                    {required: true, message: '请选择检测结果', trigger: 'change'},
+                ]
+            },
             /*日期选择器*/
             pickerOptions: {
                 disabledDate(time) {
@@ -278,36 +318,79 @@ export default {
             });
         },
     },
+
+    watch: {
+        '$route' () {
+
+            const _this = this;
+            const acceptanceNumber = sessionStorage.getItem("acceptanceNumber");
+
+            console.log("DetectionDataInput",this.$route.path.split('/'))
+            console.log("testTime",this.testTime)
+
+            if (this.$route.path.split('/').length > 2) {
+
+                /*
+                * 获取样品当前状态 等待检测or等待审核
+                *
+                * 等待检测：显示输入检测结果的表格
+                * 等待审核：不显示
+                *
+                * */
+                this.$axios.get("/sampleBasicInfo/getFlag/" + acceptanceNumber).then(res => {
+                        _this.flag = res.data.data
+                        console.log("flag：" + _this.flag);
+                    }
+                );
+
+                /*
+                * 获取当前样品已检测次数
+                * 根据次数决定标题内容
+                *
+                * */
+                this.$axios.get("/detectionRecord/getTestTime/" + acceptanceNumber).then(res => {
+                        _this.testTime = res.data.data
+                    }
+                );
+            }
+        }
+
+    },
     created() {
+        if (this.$store.getters.getUser.username) {
+            this.username = this.$store.getters.getUser.username
+        }
+
         const _this = this;
         const acceptanceNumber = sessionStorage.getItem("acceptanceNumber");
 
-        /*
+        console.log("DetectionDataInput",this.$route.path.split('/'))
+        console.log("testTime",this.testTime)
 
-        * 获取样品当前状态 等待检测or等待审核
-        *
-        * 等待检测：显示输入检测结果的表格
-        * 等待审核：不显示
-        *
-        * */
-        this.$axios.get("/sampleBasicInfo/getFlag/" + acceptanceNumber).then(res => {
-                _this.flag = res.data.data
-                console.log("flag：" + _this.flag);
-            }
-        );
+        if (this.$route.path.split('/').length > 2) {
 
-        /*
-        * 获取当前样品已检测次数
-        * 根据次数决定标题内容
-        *
-        * */
-        this.$axios.get("/detectionRecord/getTestTime/" + acceptanceNumber).then(res => {
-                _this.testTime = res.data.data
-            }
-        );
+            /*
+            * 获取样品当前状态 等待检测or等待审核
+            *
+            * 等待检测：显示输入检测结果的表格
+            * 等待审核：不显示
+            *
+            * */
+            this.$axios.get("/sampleBasicInfo/getFlag/" + acceptanceNumber).then(res => {
+                    _this.flag = res.data.data
+                    console.log("flag：" + _this.flag);
+                }
+            );
 
-        if (this.$store.getters.getUser.username) {
-            this.username = this.$store.getters.getUser.username
+            /*
+            * 获取当前样品已检测次数
+            * 根据次数决定标题内容
+            *
+            * */
+            this.$axios.get("/detectionRecord/getTestTime/" + acceptanceNumber).then(res => {
+                    _this.testTime = res.data.data
+                }
+            );
         }
     }
 
@@ -315,7 +398,6 @@ export default {
 </script>
 
 <style scoped>
-
 
 .el-input__inner {
     padding: 0;

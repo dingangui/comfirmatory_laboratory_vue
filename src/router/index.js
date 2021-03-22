@@ -39,6 +39,16 @@ const routes = [
     component: SampleInfoUpdate
   },
   {
+    path: '/DetectionDataInput',
+    name: 'DetectionDataInput',
+    component: DetectionDataInput
+  },
+  {
+    path: '/DetectionDataReview',
+    name: 'DetectionDataReview',
+    component: DetectionDataReview
+  },
+  {
     path: '/DetectionDataInput/:AcceptanceNumber',
     name: 'DetectionDataInput',
     component: DetectionDataInput
@@ -46,12 +56,17 @@ const routes = [
   {
     path: '/DetectionDataReview/:AcceptanceNumber',
     name: 'DetectionDataReview',
-    component: DetectionDataReview
+    component: DetectionDataReview,
+    // meta:{
+    //   requireAuth: true
+    // }
   },
   {
-    path: '/Test',
-    name: 'Test',
-    component: Test
+    path: '/',
+    name: 'Login',
+    component: Login,
+    // redirect: {name: "Blogs"}
+
   }
 ]
 

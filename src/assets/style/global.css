@@ -5,7 +5,13 @@
 
 */
 h1 {
-    letter-spacing: 20px;
+    letter-spacing: 25px;
+}
+
+h2 {
+    letter-spacing: 10px;
+    font-size: 18px;
+    color: #545c64;
 }
 
 html, body {
@@ -33,31 +39,52 @@ html, body {
     display: block;
 }
 
+
 /*
+    Index.vue
+    Index页面用于展示数据是的div框
 
-    对显示后台数据的表格进行定义
-
-*/
-
-.data-show .bg-purple{
-    font-weight: bold;
-}
-
+    */
 #data-show-index{
     outline: 3px solid #545c64;
 }
 
-.data-show{
-    margin:0 25px;
-}
-
+/*
+    SampleInfo.vue
+    样品基本信息 和 初筛检测结果 的分界线
+*/
 #detectionMethod{
     border-top: 3px solid #545c64;
 }
 
+/*
+  DetectionDataReview.vue
+  审核检测结果，输入结论时候表单的样式
+*/
 #inputReviewResult{
     margin: 50px auto;
     line-height: 50px;
+}
+
+
+/*
+    用在DetectionRecords.vue
+    在展示检测结果的时候，对于未审核数据的红字提醒
+
+*/
+.unreviewed{
+    color: #d52b2b;
+}
+
+.reviewed{
+    color: #530546;
+}
+/*
+  SampleInfo.vue 和  DetectionRecords.vue
+  展示数据用的div
+  */
+.data-show{
+    margin:0 25px;
 }
 
 .data-show .el-col{
@@ -81,7 +108,12 @@ html, body {
     /*    border-bottom: solid 2px #000;
         border-right: solid 2px #000;*/
 }
-
+/*
+    对显示后台数据的表格的表头标题进行加粗处理
+*/
+.data-show .bg-purple{
+    font-weight: bold;
+}
 
 /*
 ------------------------
@@ -129,28 +161,29 @@ html, body {
 /*
 ------------------------
 
-输入检测数据 页面的 style
-
-------------------------
-*/
-
-
-/*
-    输入检测数据 页面的 style
-        左侧样品基本信息区域
-*/
-
-.detection-data-input-area .el-form{
-    margin: 0 25px 0 -25px;
-}
-
-
-/*
-------------------------
-
 样品基本信息输入style
 
 */
 .sample-input {
     padding: 20px 250px;
 }
+
+/*
+    样品基本信息导入页面 - 筛查实验室筛查检测结果录入页面
+*/
+
+.detection-data-input-area .el-form{
+    margin: 0 25px 0 -25px;
+}
+
+/*主页面右侧，用于显示检测结果和输入检测结果、录入审核结论的*/
+.el-main-right-side{
+    margin-top: 68px;
+}
+
+.data-show .el-button--primary{
+    width: 12em;
+    text-align-last: justify;
+}
+
+
