@@ -147,12 +147,17 @@
                             </el-col>
                         </el-row>
 
-                        <el-form-item label="现住址" prop="presentAddress">
-                            <el-input v-model="sampleBasicInfo.presentAddress"></el-input>
-                        </el-form-item>
-                        <el-form-item label="户籍住址" prop="residenceAddress">
-                            <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
-                        </el-form-item>
+                        <el-row>
+                            <el-form-item label="现住址" prop="presentAddress">
+                                <el-input v-model="sampleBasicInfo.presentAddress"></el-input>
+                            </el-form-item>
+                        </el-row>
+
+                        <el-row>
+                            <el-form-item label="户籍住址" prop="residenceAddress">
+                                <el-input v-model="sampleBasicInfo.residenceAddress"></el-input>
+                            </el-form-item>
+                        </el-row>
 
 
                     </el-form>
@@ -245,7 +250,6 @@
 
                             <el-row>
                                 <el-col :span="24">
-
                                     <div class="text-align-right">
                                         本次检测结果输入人：{{ username }}
                                     </div>
@@ -253,8 +257,7 @@
 
                             </el-row>
                             <el-form-item>
-                                <el-button type="primary" @click="submitForm('sampleBasicInfo','detectionRecord')"> 保
-                                    存
+                                <el-button type="primary" @click="submitForm('sampleBasicInfo','detectionRecord')"> 保 存
                                 </el-button>
                             </el-form-item>
                         </el-form>

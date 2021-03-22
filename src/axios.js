@@ -39,7 +39,7 @@ axios.interceptors.response.use(response => {
             store.commit('REMOVE_INFO');
             router.push({
                 path: '/'
-            });
+            }).then(r => null);
             error.message = '请重新登录';
         }
         if (error.response.status === 403) {
