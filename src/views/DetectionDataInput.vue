@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="../assets/style/global.css">
 <template>
     <!--  最外层 div -->
     <div>
@@ -320,13 +319,13 @@ export default {
     },
 
     watch: {
-        '$route' () {
+        '$route'() {
 
             const _this = this;
             const acceptanceNumber = sessionStorage.getItem("acceptanceNumber");
 
-            console.log("DetectionDataInput",this.$route.path.split('/'))
-            console.log("testTime",this.testTime)
+            console.log("DetectionDataInput", this.$route.path.split('/'))
+            console.log("testTime", this.testTime)
 
             if (this.$route.path.split('/').length > 2) {
 
@@ -357,6 +356,8 @@ export default {
 
     },
     created() {
+        console.log("DetectionDataInput", this.$route.path.split('/'))
+
         if (this.$store.getters.getUser.username) {
             this.username = this.$store.getters.getUser.username
         }
@@ -364,8 +365,8 @@ export default {
         const _this = this;
         const acceptanceNumber = sessionStorage.getItem("acceptanceNumber");
 
-        console.log("DetectionDataInput",this.$route.path.split('/'))
-        console.log("testTime",this.testTime)
+        console.log("DetectionDataInput", this.$route.path.split('/'))
+        console.log("testTime", this.testTime)
 
         if (this.$route.path.split('/').length > 2) {
 

@@ -72,14 +72,14 @@ export default {
                     items: [],
                 }*/,
                 {
-                    title: "审核样品信息",
-                    key: "/DetectionDataReview",
+                    title: "输入检测结果",
+                    key: "/DetectionDataInput",
                     path: "",
                     items: [],
                 },
                 {
-                    title: "输入检测结果",
-                    key: "/DetectionDataInput",
+                    title: "审核样品信息",
+                    key: "/DetectionDataReview",
                     path: "",
                     items: [],
                 },

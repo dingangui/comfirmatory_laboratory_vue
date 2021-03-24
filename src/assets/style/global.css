@@ -152,6 +152,15 @@ html, body {
 .el-menu--horizontal>.el-submenu .el-submenu__title:hover{
     color: #545c64;
 }
+.el-menu--horizontal>.el-submenu:hover .el-submenu__title{
+    color: #545c64;
+}
+.el-menu--horizontal>.el-submenu:focus .el-submenu__title
+{
+
+    color: #fff;
+}
+
 
 #login-el-header {
     background: none;
