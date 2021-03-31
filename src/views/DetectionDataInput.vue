@@ -59,69 +59,56 @@
                             <h2 v-if="testTime === 3">确证检测结果输入</h2>
                             <el-form :model="detectionRecord"
                                      :rules="rules"
-                                     ref="detectionRecord">
+                                     ref="detectionRecord"
+                                     label-width="140px">
                                 <el-row>
                                     <el-col :span="12">
-                                        <el-form-item prop="detectionMethod">
-                                            <el-col :span="12">
-                                                <div class="grid-content bg-purple">检测日期</div>
-                                            </el-col>
-                                            <el-col :span="12">
-                                                <el-input v-model="detectionRecord.detectionMethod"></el-input>
-                                            </el-col>
+                                        <el-form-item prop="detectionMethod" label="检测方法">
+                                            <el-input v-model="detectionRecord.detectionMethod"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-form-item prop="detectionDate" label="检测日期">
+                                            <el-date-picker
+                                                v-model="detectionRecord.detectionDate"
+                                                type="date"
+                                                placeholder="选择日期"
+                                                size="large"
+                                                :picker-options="pickerOptions">
+                                            </el-date-picker>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
+
+                                <el-row>
+                                    <el-col :span="12">
+                                        <el-form-item label="试剂厂家" prop="reagentsAndManufacturers">
+                                            <el-input v-model="detectionRecord.reagentsAndManufacturers"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-form-item label="批号" prop="batchNumber">
+                                            <el-input v-model="detectionRecord.batchNumber"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
+
+                                <el-row>
+                                    <el-col :span="12">
+                                        <el-form-item label="有效日期" prop="effectiveDate">
+                                            <el-date-picker
+                                                v-model="detectionRecord.effectiveDate"
+                                                align="left"
+                                                type="date"
+                                                placeholder="选择日期"
+                                                size="large"
+                                                :picker-options="pickerOptions">
+                                            </el-date-picker>
                                         </el-form-item>
                                     </el-col>
 
-                                    <el-col :span="6">
-                                        <div class="grid-content bg-purple">检测日期</div>
-                                    </el-col>
-                                    <el-col :span="6">
-                                        <el-date-picker
-                                            v-model="detectionRecord.detectionDate"
-                                            align="left"
-                                            type="date"
-                                            placeholder="选择日期"
-                                            size="large"
-                                            :picker-options="pickerOptions">
-                                        </el-date-picker>
-                                    </el-col>
-                                </el-row>
-
-                                <el-row>
-                                    <el-col :span="6">
-                                        <div class="grid-content bg-purple">试剂厂家</div>
-                                    </el-col>
-                                    <el-col :span="6">
-                                        <el-input v-model="detectionRecord.reagentsAndManufacturers"></el-input>
-                                    </el-col>
-                                    <el-col :span="6">
-                                        <div class="grid-content bg-purple">批号</div>
-                                    </el-col>
-                                    <el-col :span="6">
-                                        <el-input v-model="detectionRecord.batchNumber"></el-input>
-                                    </el-col>
-                                </el-row>
-
-                                <el-row>
-                                    <el-col :span="6">
-                                        <div class="grid-content bg-purple">有效日期</div>
-                                    </el-col>
-                                    <el-col :span="6">
-                                        <el-date-picker
-                                            v-model="detectionRecord.effectiveDate"
-                                            align="left"
-                                            type="date"
-                                            placeholder="选择日期"
-                                            size="large"
-                                            :picker-options="pickerOptions">
-                                        </el-date-picker>
-                                    </el-col>
-
-                                    <div v-if="testTime === 3">
-                                        <el-col :span="6">
-                                            <div class="grid-content bg-purple">检测结果(带型)</div>
-                                        </el-col>
-                                        <el-col :span="6">
+                                    <el-col :span="12" v-if="testTime === 3">
+                                        <el-form-item label="检测结果(带型)" prop="testResult">
                                             <el-select v-model="detectionRecord.testResult" placeholder="请选择">
                                                 <el-option
                                                     v-for="item in testResultStripType"
@@ -130,14 +117,11 @@
                                                     :value="item.value">
                                                 </el-option>
                                             </el-select>
-                                        </el-col>
-                                    </div>
+                                        </el-form-item>
+                                    </el-col>
 
-                                    <div v-else>
-                                        <el-col :span="6">
-                                            <div class="grid-content bg-purple">检测结果</div>
-                                        </el-col>
-                                        <el-col :span="6">
+                                    <el-col :span="12" v-else>
+                                        <el-form-item label="检测结果" prop="testResult">
                                             <el-select v-model="detectionRecord.testResult" placeholder="请选择">
                                                 <el-option
                                                     v-for="item in testResult"
@@ -146,21 +130,18 @@
                                                     :value="item.value">
                                                 </el-option>
                                             </el-select>
-                                        </el-col>
-                                    </div>
+                                        </el-form-item>
+                                    </el-col>
 
                                 </el-row>
-
                                 <el-row>
                                     <el-col :span="24">
-
                                         <div class="text-align-right">
                                             本次检测结果输入人：{{ username }}
                                             <el-button type="primary" @click="saveDetectionRecord('detectionRecord')">保存
                                             </el-button>
                                         </div>
                                     </el-col>
-
                                 </el-row>
 
                             </el-form>
@@ -198,7 +179,7 @@ export default {
             detectionRecord: {
                 acceptanceNumber: '',
                 detectionMethod: 'ELISA',
-                detectionDate: '2021-03-19',
+                detectionDate: new Date,
                 reagentsAndManufacturers: '哈药六厂',
                 batchNumber: '990011',
                 effectiveDate: '2021-02-11',
@@ -253,6 +234,8 @@ export default {
                 disabledDate(time) {
                     return time.getTime() > Date.now();
                 },
+
+
                 shortcuts: [{
                     text: '今天',
                     onClick(picker) {
@@ -356,6 +339,7 @@ export default {
 
     },
     created() {
+
         console.log("DetectionDataInput", this.$route.path.split('/'))
 
         if (this.$store.getters.getUser.username) {

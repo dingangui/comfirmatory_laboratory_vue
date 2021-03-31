@@ -54,7 +54,7 @@ html, body {
     样品基本信息 和 初筛检测结果 的分界线
 */
 #detectionMethod{
-    border-top: 3px solid #545c64;
+    border-top: 2px solid #545c64;
 }
 
 /*

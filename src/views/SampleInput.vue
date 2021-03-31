@@ -17,7 +17,9 @@
 
                 <!--表单输入界面-->
                 <div>
-                    <el-form :model="sampleBasicInfo" :rules="rules" ref="sampleBasicInfo"
+                    <el-form :model="sampleBasicInfo"
+                             :rules="rules"
+                             ref="sampleBasicInfo"
                              label-width="100px">
 
                         <el-row>
@@ -165,105 +167,96 @@
 
                     <div v-show="true" class="grid-content bg-purple-light detection-data-input-area">
                         <h1 v-show="true">筛查实验室筛查检测结果录入</h1>
-                        <el-form :model="detectionRecord" :rules="rules" ref="detectionRecord">
+                        <el-form :model="detectionRecord"
+                                 :rules="rules"
+                                 ref="detectionRecord"
+                                 label-width="140px">
                             <el-row>
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">检测方法</div>
+                                <el-col :span="12">
+                                    <el-form-item prop="detectionMethod" label="检测方法">
+                                        <el-input v-model="detectionRecord.detectionMethod"></el-input>
+                                    </el-form-item>
                                 </el-col>
-                                <el-col :span="6">
-                                    <el-input v-model="detectionRecord.detectionMethod"></el-input>
-                                </el-col>
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">检测日期</div>
-                                </el-col>
-                                <el-col :span="6">
-                                    <el-date-picker
-                                        v-model="detectionRecord.detectionDate"
-                                        align="left"
-                                        type="date"
-                                        placeholder="选择日期"
-                                        size="large"
-                                        :picker-options="pickerOptions">
-                                    </el-date-picker>
+                                <el-col :span="12">
+                                    <el-form-item prop="detectionDate" label="检测日期">
+                                        <el-date-picker
+                                            v-model="detectionRecord.detectionDate"
+                                            type="date"
+                                            placeholder="选择日期"
+                                            size="large"
+                                            :picker-options="pickerOptions">
+                                        </el-date-picker>
+                                    </el-form-item>
                                 </el-col>
                             </el-row>
 
                             <el-row>
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">试剂厂家</div>
+                                <el-col :span="12">
+                                    <el-form-item label="试剂厂家" prop="reagentsAndManufacturers">
+                                        <el-input v-model="detectionRecord.reagentsAndManufacturers"></el-input>
+                                    </el-form-item>
                                 </el-col>
-                                <el-col :span="6">
-                                    <el-input v-model="detectionRecord.reagentsAndManufacturers"></el-input>
-                                </el-col>
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">批号</div>
-                                </el-col>
-                                <el-col :span="6">
-                                    <el-input v-model="detectionRecord.batchNumber"></el-input>
+                                <el-col :span="12">
+                                    <el-form-item label="批号" prop="batchNumber">
+                                        <el-input v-model="detectionRecord.batchNumber"></el-input>
+                                    </el-form-item>
                                 </el-col>
                             </el-row>
 
                             <el-row>
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">有效日期</div>
+                                <el-col :span="12">
+                                    <el-form-item label="有效日期" prop="effectiveDate">
+                                        <el-date-picker
+                                            v-model="detectionRecord.effectiveDate"
+                                            align="left"
+                                            type="date"
+                                            placeholder="选择日期"
+                                            size="large"
+                                            :picker-options="pickerOptions">
+                                        </el-date-picker>
+                                    </el-form-item>
                                 </el-col>
-                                <el-col :span="6">
-                                    <el-date-picker
-                                        v-model="detectionRecord.effectiveDate"
-                                        align="left"
-                                        type="date"
-                                        placeholder="选择日期"
-                                        size="large"
-                                        :picker-options="pickerOptions">
-                                    </el-date-picker>
-                                </el-col>
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">检测结果</div>
-                                </el-col>
-                                <el-col :span="6">
-                                    <el-select v-model="detectionRecord.testResult" placeholder="请选择">
-                                        <el-option
-                                            v-for="item in testResult"
-                                            :key="item.value"
-                                            :label="item.label"
-                                            :value="item.value">
-                                        </el-option>
-                                    </el-select>
+
+                                <el-col :span="12">
+                                    <el-form-item label="检测结果" prop="testResult">
+                                        <el-select v-model="detectionRecord.testResult" placeholder="请选择">
+                                            <el-option
+                                                v-for="item in testResult"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
                                 </el-col>
                             </el-row>
 
                             <el-row>
-                                <el-col :span="6">
-                                    <div class="grid-content bg-purple">检测结论</div>
-                                </el-col>
-                                <el-col :span="6">
-                                    <el-select v-model="detectionRecord.conclusion" placeholder="请选择">
-                                        <el-option
-                                            v-for="item in conclusions"
-                                            :key="item.value"
-                                            :label="item.label"
-                                            :value="item.value">
-                                        </el-option>
-                                    </el-select>
-                                </el-col>
-                            </el-row>
-
-                            <el-row>
-                                <el-col :span="24">
-                                    <div class="text-align-right">
-                                        本次检测结果输入人：{{ username }}
-                                    </div>
+                                <el-col :span="12">
+                                    <el-form-item label="检测者" prop="reviewerName">
+                                        <el-input v-model="detectionRecord.inspectorName"></el-input>
+                                    </el-form-item>
                                 </el-col>
 
+                                <el-col :span="12">
+                                    <el-form-item label="审核者" prop="reviewerName">
+                                        <el-input v-model="detectionRecord.reviewerName"></el-input>
+                                    </el-form-item>
+                                </el-col>
                             </el-row>
-                            <el-form-item>
-                                <el-button type="primary" @click="submitForm('sampleBasicInfo','detectionRecord')"> 保 存
-                                </el-button>
-                            </el-form-item>
                         </el-form>
 
-
+                        <el-row>
+                            <el-col :span="24">
+                                <div class="text-align-right">
+                                    <el-button type="primary" @click="submitForm('sampleBasicInfo', 'detectionRecord')">
+                                        保存
+                                    </el-button>
+                                </div>
+                            </el-col>
+                        </el-row>
                     </div>
+
                 </div>
             </el-main>
         </el-container>
@@ -282,7 +275,7 @@ export default {
         return {
             sampleBasicInfo: {
                 inspectionUnit: '第一医院',
-                inspectionDate: '2021-03-19',
+                inspectionDate: new Date,
                 sampleType: '血液',
                 inspectedType: '门诊',
                 name: '王铅华',
@@ -303,7 +296,7 @@ export default {
             detectionRecord: {
                 acceptanceNumber: '',
                 detectionMethod: 'ELISA',
-                detectionDate: '2021-03-19',
+                detectionDate: new Date,
                 reagentsAndManufacturers: '哈药六厂',
                 batchNumber: '990011',
                 effectiveDate: '2021-02-11',
@@ -340,48 +333,67 @@ export default {
             }],
 
             rules: {
-                name: [
-                    {required: true, message: '请输入姓名', trigger: 'blur'},
+                detectionMethod: [
+                    {required: true, message: '请选择检测方法', trigger: 'change'},
+                ], detectionDate: [
+                    {required: true, message: '请选择检测日期', trigger: 'change'},
+                ], reagentsAndManufacturers: [
+                    {required: true, message: '请选择试剂厂家', trigger: 'change'},
+                ], batchNumber: [
+                    {required: true, message: '请选择批号', trigger: 'change'},
+                ], effectiveDate: [
+                    {required: true, message: '请选择有效日期', trigger: 'change'},
+                ], testResult: [
+                    {required: true, message: '请选择检测结果', trigger: 'change'},
+                ], inspectorName: [
+                    {required: true, message: '请选择检测者姓名', trigger: 'change'},
+                ], reviewerName: [
+                    {required: true, message: '请选择审核者姓名', trigger: 'change'},
                 ]
             },
-            pickerOptions: {
-                disabledDate(time) {
-                    return time.getTime() > Date.now();
-                },
-                shortcuts: [{
-                    text: '今天',
-                    onClick(picker) {
-                        picker.$emit('pick', new Date());
-                    }
-                }, {
-                    text: '昨天',
-                    onClick(picker) {
-                        const date = new Date();
-                        date.setTime(date.getTime() - 3600 * 1000 * 24);
-                        picker.$emit('pick', date);
-                    }
-                }, {
-                    text: '一周前',
-                    onClick(picker) {
-                        const date = new Date();
-                        date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-                        picker.$emit('pick', date);
-                    }
-                }]
+
+            pickerOptions
+    :
+        {
+            disabledDate(time)
+            {
+                return time.getTime() > Date.now();
             }
-        };
+        ,
+            [{
+                text: '今天',
+                onClick(picker) {
+                    picker.$emit('pick', new Date());
+                }
+            }, {
+                text: '昨天',
+                onClick(picker) {
+                    const date = new Date();
+                    date.setTime(date.getTime() - 3600 * 1000 * 24);
+                    picker.$emit('pick', date);
+                }
+            }, {
+                text: '一周前',
+                onClick(picker) {
+                    const date = new Date();
+                    date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                    picker.$emit('pick', date);
+                }
+            }]
+        }
+    }
+
     },
     methods: {
-        submitForm(sampleInfo, detectionRecord) {
+        submitForm(sampleBasicInfo, detectionRecord) {
 
-            this.$refs[sampleInfo].validate((valid) => {
+            this.$refs[sampleBasicInfo].validate((valid) => {
                 if (valid) {
 
 
                     this.sampleBasicInfo.acceptanceNumber = this.acceptanceNumber
                     this.sampleBasicInfo.dataEntryStaffName = this.$store.getters.getUser.username
                     this.sampleBasicInfo.dataEntryStaffAccountID = this.$store.getters.getUser.id
-                    const _this = this;
                     // alert('提交成功!');
                     /*
                     * post 中的 this.sampleBasicInfo 表示 post 提交到对应链接时的内容
