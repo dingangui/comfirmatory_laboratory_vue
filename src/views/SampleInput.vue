@@ -34,12 +34,12 @@
                                 <div class="grid-content bg-purple-light">
                                     <el-form-item label="送检日期" prop="inspectionDate">
                                         <el-date-picker
-                                            v-model="sampleBasicInfo.inspectionDate"
-                                            align="left"
-                                            type="date"
-                                            placeholder="选择日期"
-                                            size="large"
-                                            :picker-options="pickerOptions">
+                                                v-model="sampleBasicInfo.inspectionDate"
+                                                align="left"
+                                                type="date"
+                                                placeholder="选择日期"
+                                                size="large"
+                                                :picker-options="pickerOptions">
                                         </el-date-picker>
                                     </el-form-item>
                                 </div>
@@ -83,10 +83,10 @@
                                     <el-form-item label="性别" prop="sex">
                                         <el-select v-model="sampleBasicInfo.sex" placeholder="请选择">
                                             <el-option
-                                                v-for="item in options"
-                                                :key="item.value"
-                                                :label="item.label"
-                                                :value="item.value">
+                                                    v-for="item in options"
+                                                    :key="item.value"
+                                                    :label="item.label"
+                                                    :value="item.value">
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
@@ -180,11 +180,11 @@
                                 <el-col :span="12">
                                     <el-form-item prop="detectionDate" label="检测日期">
                                         <el-date-picker
-                                            v-model="detectionRecord.detectionDate"
-                                            type="date"
-                                            placeholder="选择日期"
-                                            size="large"
-                                            :picker-options="pickerOptions">
+                                                v-model="detectionRecord.detectionDate"
+                                                type="date"
+                                                placeholder="选择日期"
+                                                size="large"
+                                                :picker-options="pickerOptions">
                                         </el-date-picker>
                                     </el-form-item>
                                 </el-col>
@@ -207,12 +207,12 @@
                                 <el-col :span="12">
                                     <el-form-item label="有效日期" prop="effectiveDate">
                                         <el-date-picker
-                                            v-model="detectionRecord.effectiveDate"
-                                            align="left"
-                                            type="date"
-                                            placeholder="选择日期"
-                                            size="large"
-                                            :picker-options="pickerOptions">
+                                                v-model="detectionRecord.effectiveDate"
+                                                align="left"
+                                                type="date"
+                                                placeholder="选择日期"
+                                                size="large"
+                                                :picker-options="pickerOptions">
                                         </el-date-picker>
                                     </el-form-item>
                                 </el-col>
@@ -221,10 +221,10 @@
                                     <el-form-item label="检测结果" prop="testResult">
                                         <el-select v-model="detectionRecord.testResult" placeholder="请选择">
                                             <el-option
-                                                v-for="item in testResult"
-                                                :key="item.value"
-                                                :label="item.label"
-                                                :value="item.value">
+                                                    v-for="item in testResult"
+                                                    :key="item.value"
+                                                    :label="item.label"
+                                                    :value="item.value">
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
@@ -265,191 +265,189 @@
 
 <script>
 
-import NavMenu from "@/components/NavMenu";
+    import NavMenu from "@/components/NavMenu";
 
-export default {
+    export default {
 
-    name: "SampleInput",
-    components: {NavMenu},
-    data() {
-        return {
-            sampleBasicInfo: {
-                inspectionUnit: '第一医院',
-                inspectionDate: new Date,
-                sampleType: '血液',
-                inspectedType: '门诊',
-                name: '王铅华',
-                sex: '男',
-                age: '29',
-                profession: '工人',
-                country: '中国',
-                nation: '汉',
-                marriage: '已婚',
-                educationalLevel: '高中',
-                IDNumber: '155547196805232241',
-                phone: '18566589632',
-                presentAddress: '河北省邢台市XX村',
-                residenceAddress: '四川省攀枝花市XX镇',
-                dataEntryStaffName: '',
-                dataEntryStaffAccountID: ''
-            },
-            detectionRecord: {
+        name: "SampleInput",
+        components: {NavMenu},
+        data() {
+            return {
+                sampleBasicInfo: {
+                    inspectionUnit: '第一医院',
+                    inspectionDate: new Date,
+                    sampleType: '血液',
+                    inspectedType: '门诊',
+                    name: '王铅华',
+                    sex: '男',
+                    age: '29',
+                    profession: '工人',
+                    country: '中国',
+                    nation: '汉',
+                    marriage: '已婚',
+                    educationalLevel: '高中',
+                    IDNumber: '155547196805232241',
+                    phone: '18566589632',
+                    presentAddress: '河北省邢台市XX村',
+                    residenceAddress: '四川省攀枝花市XX镇',
+                    dataEntryStaffName: '',
+                    dataEntryStaffAccountID: ''
+                },
+                detectionRecord: {
+                    acceptanceNumber: '',
+                    detectionMethod: 'ELISA',
+                    detectionDate: new Date,
+                    reagentsAndManufacturers: '哈药六厂',
+                    batchNumber: '990011',
+                    effectiveDate: '2021-02-11',
+                    testResult: '有反应',
+                    conclusion: 'HIV抗体阳性',
+                    inspectorAccountID: '',
+                    inspectorName: '',
+                },
                 acceptanceNumber: '',
-                detectionMethod: 'ELISA',
-                detectionDate: new Date,
-                reagentsAndManufacturers: '哈药六厂',
-                batchNumber: '990011',
-                effectiveDate: '2021-02-11',
-                testResult: '有反应',
-                conclusion: 'HIV抗体阳性',
-                inspectorAccountID: '',
-                inspectorName: '',
-            },
-            acceptanceNumber: '',
-            testResult: [{
-                value: '有反应',
-                label: '有反应'
-            }, {
-                value: '无反应',
-                label: '无反应'
-            }],
-            conclusions: [{
-                value: 'HIV抗体阴性',
-                label: 'HIV抗体阴性'
-            }, {
-                value: 'HIV抗体阳性',
-                label: 'HIV抗体阳性'
-            }, {
-                value: 'HIV感染待确定',
-                label: 'HIV感染待确定'
-            },
-            ],
-            options: [{
-                value: '男',
-                label: '男'
-            }, {
-                value: '女',
-                label: '女'
-            }],
+                testResult: [{
+                    value: '有反应',
+                    label: '有反应'
+                }, {
+                    value: '无反应',
+                    label: '无反应'
+                }],
+                conclusions: [{
+                    value: 'HIV抗体阴性',
+                    label: 'HIV抗体阴性'
+                }, {
+                    value: 'HIV抗体阳性',
+                    label: 'HIV抗体阳性'
+                }, {
+                    value: 'HIV感染待确定',
+                    label: 'HIV感染待确定'
+                },
+                ],
+                options: [{
+                    value: '男',
+                    label: '男'
+                }, {
+                    value: '女',
+                    label: '女'
+                }],
 
-            rules: {
-                detectionMethod: [
-                    {required: true, message: '请选择检测方法', trigger: 'change'},
-                ], detectionDate: [
-                    {required: true, message: '请选择检测日期', trigger: 'change'},
-                ], reagentsAndManufacturers: [
-                    {required: true, message: '请选择试剂厂家', trigger: 'change'},
-                ], batchNumber: [
-                    {required: true, message: '请选择批号', trigger: 'change'},
-                ], effectiveDate: [
-                    {required: true, message: '请选择有效日期', trigger: 'change'},
-                ], testResult: [
-                    {required: true, message: '请选择检测结果', trigger: 'change'},
-                ], inspectorName: [
-                    {required: true, message: '请选择检测者姓名', trigger: 'change'},
-                ], reviewerName: [
-                    {required: true, message: '请选择审核者姓名', trigger: 'change'},
-                ]
-            },
+                rules: {
+                    detectionMethod: [
+                        {required: true, message: '请选择检测方法', trigger: 'change'},
+                    ], detectionDate: [
+                        {required: true, message: '请选择检测日期', trigger: 'change'},
+                    ], reagentsAndManufacturers: [
+                        {required: true, message: '请选择试剂厂家', trigger: 'change'},
+                    ], batchNumber: [
+                        {required: true, message: '请选择批号', trigger: 'change'},
+                    ], effectiveDate: [
+                        {required: true, message: '请选择有效日期', trigger: 'change'},
+                    ], testResult: [
+                        {required: true, message: '请选择检测结果', trigger: 'change'},
+                    ], inspectorName: [
+                        {required: true, message: '请选择检测者姓名', trigger: 'change'},
+                    ], reviewerName: [
+                        {required: true, message: '请选择审核者姓名', trigger: 'change'},
+                    ]
+                },
 
-            pickerOptions
-    :
-        {
-            disabledDate(time)
-            {
-                return time.getTime() > Date.now();
+                pickerOptions: {
+                    disabledDate(time) {
+                        return time.getTime() > Date.now();
+                    },
+
+
+                    shortcuts: [{
+                        text: '今天',
+                        onClick(picker) {
+                            picker.$emit('pick', new Date());
+                        }
+                    }, {
+                        text: '昨天',
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24);
+                            picker.$emit('pick', date);
+                        }
+                    }, {
+                        text: '一周前',
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit('pick', date);
+                        }
+                    }]
+                }
             }
-        ,
-            [{
-                text: '今天',
-                onClick(picker) {
-                    picker.$emit('pick', new Date());
-                }
-            }, {
-                text: '昨天',
-                onClick(picker) {
-                    const date = new Date();
-                    date.setTime(date.getTime() - 3600 * 1000 * 24);
-                    picker.$emit('pick', date);
-                }
-            }, {
-                text: '一周前',
-                onClick(picker) {
-                    const date = new Date();
-                    date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-                    picker.$emit('pick', date);
-                }
-            }]
-        }
-    }
-
-    },
-    methods: {
-        submitForm(sampleBasicInfo, detectionRecord) {
-
-            this.$refs[sampleBasicInfo].validate((valid) => {
-                if (valid) {
-
-
-                    this.sampleBasicInfo.acceptanceNumber = this.acceptanceNumber
-                    this.sampleBasicInfo.dataEntryStaffName = this.$store.getters.getUser.username
-                    this.sampleBasicInfo.dataEntryStaffAccountID = this.$store.getters.getUser.id
-                    // alert('提交成功!');
-                    /*
-                    * post 中的 this.sampleBasicInfo 表示 post 提交到对应链接时的内容
-                    * res 是从链接返回来的数据
-                    *
-                    * 引入 axios.js 后，就可以不用在 url 中写上 http://localhost:5000 了
-                    * 引入 axios.js 需要 在main.js 中 import "./axios"
-                    * */
-                    this.$axios.post("/sampleBasicInfo/save", this.sampleBasicInfo).then(res => {
-                            console.log(res.data.msg);
-                            // console.log(res.data);
-                        }
-                    )
-                } else {
-                    alert('error submit!!');
-                    return false;
-                }
-            });
-
-            this.$refs[detectionRecord].validate((valid) => {
-                if (valid) {
-                    this.detectionRecord.inspectorName = this.$store.getters.getUser.username
-                    this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
-                    this.detectionRecord.acceptanceNumber = this.acceptanceNumber
-
-                    sessionStorage.setItem("acceptanceNumber", this.acceptanceNumber)
-
-                    const _this = this;
-
-                    this.$axios.post("/detectionRecord/save", this.detectionRecord).then(res => {
-                            alert(res.data.msg);
-                            _this.$router.push("/DetectionDataInput/" + _this.acceptanceNumber);
-                        }
-                    )
-                } else {
-                    alert('error submit!!');
-                    return false;
-                }
-            });
-
         },
-        resetForm(formName) {
-            this.$refs[formName].resetFields();
-        }
-    },
-    created() {
-        const _this = this
-        this.$axios.get("/sampleBasicInfo/getAcceptanceNumber").then(res => {
-                _this.acceptanceNumber = res.data.data;
+        methods: {
+            submitForm(sampleBasicInfo, detectionRecord) {
+
+                this.$refs[sampleBasicInfo].validate((valid) => {
+                    if (valid) {
+
+
+                        this.sampleBasicInfo.acceptanceNumber = this.acceptanceNumber
+                        this.sampleBasicInfo.dataEntryStaffName = this.$store.getters.getUser.username
+                        this.sampleBasicInfo.dataEntryStaffAccountID = this.$store.getters.getUser.id
+                        // alert('提交成功!');
+                        /*
+                        * post 中的 this.sampleBasicInfo 表示 post 提交到对应链接时的内容
+                        * res 是从链接返回来的数据
+                        *
+                        * 引入 axios.js 后，就可以不用在 url 中写上 http://localhost:5000 了
+                        * 引入 axios.js 需要 在main.js 中 import "./axios"
+                        * */
+                        this.$axios.post("/sampleBasicInfo/save", this.sampleBasicInfo).then(res => {
+                                console.log(res.data.msg);
+                                // console.log(res.data);
+                            }
+                        )
+                    } else {
+                        alert('error submit!!');
+                        return false;
+                    }
+                });
+
+                this.$refs[detectionRecord].validate((valid) => {
+                    if (valid) {
+                        this.detectionRecord.inspectorName = this.$store.getters.getUser.username
+                        this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
+                        this.detectionRecord.acceptanceNumber = this.acceptanceNumber
+
+                        sessionStorage.setItem("acceptanceNumber", this.acceptanceNumber)
+
+                        const _this = this;
+
+                        this.$axios.post("/detectionRecord/save", this.detectionRecord).then(res => {
+                                alert(res.data.msg);
+                                _this.$router.push("/DetectionDataInput/" + _this.acceptanceNumber);
+                            }
+                        )
+                    } else {
+                        alert('表单内容错误');
+                        return false;
+                    }
+                });
+
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
             }
-        )
-        if (this.$store.getters.getUser.username) {
-            this.username = this.$store.getters.getUser.username
+        },
+
+        created() {
+            const _this = this
+            this.$axios.get("/sampleBasicInfo/getAcceptanceNumber").then(res => {
+                    _this.acceptanceNumber = res.data.data;
+                }
+            )
+            if (this.$store.getters.getUser.username) {
+                this.username = this.$store.getters.getUser.username
+            }
         }
     }
-}
 </script>
 
 <style scoped>
