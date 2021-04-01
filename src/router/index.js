@@ -43,11 +43,13 @@ const routes = [
     name: 'DetectionDataInput',
     component: DetectionDataInput
   },
-  {
+
+  //  审核样品的功能暂时取消
+ /* {
     path: '/DetectionDataReview',
     name: 'DetectionDataReview',
     component: DetectionDataReview
-  },
+  },*/
   {
     path: '/DetectionDataInput/:AcceptanceNumber',
     name: 'DetectionDataInput',
@@ -66,7 +68,6 @@ const routes = [
     name: 'Login',
     component: Login,
     // redirect: {name: "Blogs"}
-
   }
 ]
 

@@ -127,10 +127,13 @@ export default {
             _this.sampleLists = res.data.data
         })
 
+//        审核样品的功能暂时取消
+/*
         if(path === "DetectionDataReview")
             this.$axios.get("/sampleBasicInfo/getAllReviewableSampleList").then(res => {
                 _this.sampleLists = res.data.data
             })
+*/
 
         if(path === "DetectionDataInput")
             this.$axios.get("/sampleBasicInfo/getAllDetectableSampleList").then(res => {

@@ -50,7 +50,6 @@
                         <!--右侧上半部分，展示检测记录-->
                         <DetectionRecords></DetectionRecords>
 
-
                         <!--下半部分，录入审核结果-->
                         <div>
                             <el-form
