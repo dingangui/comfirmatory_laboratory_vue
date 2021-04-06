@@ -134,10 +134,38 @@
                                     </el-col>
 
                                 </el-row>
+
+                                <el-row>
+                                    <el-col :span="12">
+                                        <div class="grid-content bg-purple">
+                                            <el-form-item prop="conclusion" label="结论" v-if="testTime === 4">
+                                                <el-select v-model="detectionRecord.conclusion" placeholder="请选择">
+                                                    <el-option
+                                                        v-for="item in conclusions"
+                                                        :key="item.value"
+                                                        :label="item.label"
+                                                        :value="item.value">
+                                                    </el-option>
+                                                </el-select>
+                                            </el-form-item>
+
+                                            <el-form-item prop="conclusion" label="筛查结论" v-else>
+                                                <el-select v-model="detectionRecord.conclusion" placeholder="请选择">
+                                                    <el-option
+                                                        v-for="item in screeningConclusions"
+                                                        :key="item.value"
+                                                        :label="item.label"
+                                                        :value="item.value">
+                                                    </el-option>
+                                                </el-select>
+                                            </el-form-item>
+                                        </div>
+                                    </el-col>
+
+                                </el-row>
                                 <el-row>
                                     <el-col :span="24">
                                         <div class="text-align-right">
-                                            本次检测结果输入人：{{ username }}
                                             <el-button type="primary" @click="saveDetectionRecord('detectionRecord')">保存
                                             </el-button>
                                         </div>
@@ -213,7 +241,30 @@ export default {
                     label: 'gp120\\gp160,p24,p18'
                 }
             ],
-
+            /*筛查结论的选项（复检用）*/
+            screeningConclusions: [{
+                value: 'HIV抗体阴性',
+                label: 'HIV抗体阴性'
+            }, {
+                value: 'HIV抗体阳性',
+                label: 'HIV抗体阳性'
+            }, {
+                value: 'HIV感染待确定',
+                label: 'HIV感染待确定'
+            },
+            ],
+            /*结论的选项（确证检测用）*/
+            conclusions: [{
+                value: 'HIV抗体阴性',
+                label: 'HIV抗体阴性'
+            }, {
+                value: 'HIV-1抗体不确定',
+                label: 'HIV-1抗体不确定'
+            }, {
+                value: 'HIV-1抗体阳性',
+                label: 'HIV-1抗体阳性'
+            },
+            ],
             rules: {
                 detectionMethod: [
                     {required: true, message: '请选择检测方法', trigger: 'change'},
@@ -227,6 +278,8 @@ export default {
                     {required: true, message: '请选择有效日期', trigger: 'change'},
                 ], testResult: [
                     {required: true, message: '请选择检测结果', trigger: 'change'},
+                ], conclusion: [
+                    {required: true, message: '请输入结论', trigger: 'change'},
                 ]
             },
             /*日期选择器*/
@@ -332,6 +385,7 @@ export default {
                 * */
                 this.$axios.get("/detectionRecord/getTestTime/" + acceptanceNumber).then(res => {
                         _this.testTime = res.data.data
+                        console.log("testTime", this.testTime)
                     }
                 );
             }
@@ -340,7 +394,6 @@ export default {
     },
     created() {
 
-        console.log("DetectionDataInput", this.$route.path.split('/'))
 
         if (this.$store.getters.getUser.username) {
             this.username = this.$store.getters.getUser.username

@@ -225,8 +225,7 @@
                         </el-col>
                     </el-row>
 
-
-                    <el-row>
+                    <!--<el-row>
                         <el-col :span="6">
                             <div class="grid-content bg-purple">检测者</div>
                         </el-col>
@@ -239,7 +238,7 @@
                         <el-col :span="6">
                             <el-input readonly v-model="detectionRecord.reviewerName"></el-input>
                         </el-col>
-                    </el-row>
+                    </el-row>-->
                     <!-- 表单 快速填写样品基本信息 -->
                 </el-form>
             </div>

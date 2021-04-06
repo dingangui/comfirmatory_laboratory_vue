@@ -55,14 +55,14 @@ const routes = [
     name: 'DetectionDataInput',
     component: DetectionDataInput
   },
-  {
+  /*{
     path: '/DetectionDataReview/:AcceptanceNumber',
     name: 'DetectionDataReview',
     component: DetectionDataReview,
     // meta:{
     //   requireAuth: true
     // }
-  },
+  },*/
   {
     path: '/',
     name: 'Login',

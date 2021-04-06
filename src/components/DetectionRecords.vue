@@ -84,8 +84,8 @@
 
                     <el-col :span="6">
                         <div class="grid-content bg-purple-light">
-                            <span class="unreviewed" v-if="detectionRecord.reviewerName === null">该结果未审核</span>
-                            <span class="reviewed" v-else>{{detectionRecord.conclusion}}</span>
+                           <!-- <span class="unreviewed" v-if="detectionRecord.reviewerName === null">该结果未审核</span>-->
+                            <span class="reviewed">{{detectionRecord.conclusion}}</span>
                         </div>
                     </el-col>
 
@@ -99,7 +99,7 @@
 
                 </el-row>
 
-                <el-row>
+               <!-- <el-row>
 
                     <el-col :span="6">
                         <div class="grid-content bg-purple">检测者</div>
@@ -120,7 +120,7 @@
                         {{detectionRecord.reviewerName}}
                     </el-col>
 
-                </el-row>
+                </el-row>-->
             </el-form>
         </div>
     </div>
