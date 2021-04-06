@@ -77,6 +77,12 @@ export default {
                     path: "",
                     items: [],
                 },
+                /*{
+                    title: "修改样品信息",
+                    key: "/InfoEdit",
+                    path: "",
+                    items: [],
+                },*/
                 //        审核样品的功能暂时取消
                 /*{
                     title: "审核样品信息",

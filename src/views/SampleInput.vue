@@ -233,7 +233,7 @@
 
                             <el-row>
                                 <el-col :span="12">
-                                    <el-form-item prop="conclusion" label="结论">
+                                    <el-form-item prop="conclusion" label="筛查结论">
                                         <el-select v-model="detectionRecord.conclusion" placeholder="请选择">
                                             <el-option
                                                 v-for="item in conclusions"

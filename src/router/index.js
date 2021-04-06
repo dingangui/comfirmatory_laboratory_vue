@@ -6,9 +6,9 @@ import SignUp from "@/views/SignUp";
 import SampleInput from "@/views/SampleInput";
 import SampleInfoUpdate from "@/views/SampleInfoUpdate";
 import DetectionDataInput from "@/views/DetectionDataInput";
-import Test from "@/views/Test";
 import Index from "@/views/Index";
-import DetectionDataReview from "@/views/DetectionDataReview";
+import InfoEdit from "@/views/InfoEdit";
+import InfoShow from "@/views/InfoShow";
 
 Vue.use(VueRouter)
 
@@ -39,6 +39,11 @@ const routes = [
     component: SampleInfoUpdate
   },
   {
+    path: '/InfoShow/:AcceptanceNumber',
+    name: 'InfoShow',
+    component: InfoShow
+  },
+  {
     path: '/DetectionDataInput',
     name: 'DetectionDataInput',
     component: DetectionDataInput
@@ -54,6 +59,11 @@ const routes = [
     path: '/DetectionDataInput/:AcceptanceNumber',
     name: 'DetectionDataInput',
     component: DetectionDataInput
+  },
+  {
+    path: '/InfoEdit/:AcceptanceNumber',
+    name: 'InfoEdit',
+    component: InfoEdit
   },
   /*{
     path: '/DetectionDataReview/:AcceptanceNumber',

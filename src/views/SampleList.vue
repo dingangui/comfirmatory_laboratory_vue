@@ -78,8 +78,7 @@
                         <el-button type="primary" @click="operation(sampleList.flag,sampleList.acceptanceNumber)">
                             {{ sampleList.operation }}
                         </el-button>
-                        <el-button type="info" @click="handleClick(sampleList.acceptanceNumber)">查看</el-button>
-                        <el-button type="warning">修改</el-button>
+                        <el-button type="warning" @click="infoEdit(sampleList.acceptanceNumber)">修改</el-button>
                         <el-button type="danger">删除</el-button>
                     </div>
                 </el-col>
@@ -95,12 +94,15 @@ export default {
     name: "SampleList",
     data() {
         return {
-            sampleLists: []
+            sampleLists: [
+                {currentState: ''}
+            ]
         }
     },
     methods: {
-        handleClick(row) {
-            console.log(row);
+        infoEdit(acceptanceNumber) {
+            sessionStorage.setItem("acceptanceNumber", acceptanceNumber);
+            this.$router.push("/InfoEdit/" + acceptanceNumber);
         },
         operation(flag, acceptanceNumber) {
             if (flag === 'waitingForTest') {
@@ -122,20 +124,20 @@ export default {
 
         const path = this.$route.path.split('/')[1];
 
-        if(path === "Index")
-        this.$axios.get("/sampleBasicInfo/getAllOperableSampleList").then(res => {
-            _this.sampleLists = res.data.data
-        })
-
-//        审核样品的功能暂时取消
-/*
-        if(path === "DetectionDataReview")
-            this.$axios.get("/sampleBasicInfo/getAllReviewableSampleList").then(res => {
+        if (path === "Index")
+            this.$axios.get("/sampleBasicInfo/getAllOperableSampleList").then(res => {
                 _this.sampleLists = res.data.data
             })
-*/
 
-        if(path === "DetectionDataInput")
+//        审核样品的功能暂时取消
+        /*
+                if(path === "DetectionDataReview")
+                    this.$axios.get("/sampleBasicInfo/getAllReviewableSampleList").then(res => {
+                        _this.sampleLists = res.data.data
+                    })
+        */
+
+        if (path === "DetectionDataInput")
             this.$axios.get("/sampleBasicInfo/getAllDetectableSampleList").then(res => {
                 _this.sampleLists = res.data.data
             })
