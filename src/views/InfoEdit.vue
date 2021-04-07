@@ -15,7 +15,7 @@
                     <div>样品受理编号：{{ acceptanceNumber }}</div>
 
                     <!--表单输入界面-->
-                    <div>
+                    <div class="sample-input">
                         <el-form :model="sampleBasicInfo"
                                  :rules="rules"
                                  ref="sampleBasicInfo"
@@ -177,7 +177,7 @@
                                   title="修改检测结果"
                                   v-name=detectionRecord.sequence>
 
-                    <div class="grid-content bg-purple-light detection-data-input-area">
+                    <div class="grid-content bg-purple-light detection-data-input-area sample-input">
                         <h2 v-if="detectionRecord.sequence === 2">第一次复检结果</h2>
                         <h2 v-if="detectionRecord.sequence === 3">第二次复检结果</h2>
                         <h2 v-if="detectionRecord.sequence === 4">确证检测结果</h2>
