@@ -1,44 +1,12 @@
 <template>
     <!--  最外层 div -->
     <div>
-
-        <!-- 最外层 div 内负责布局管理的 -->
-        <el-container>
-
-            <!-- 导航栏 -->
-            <el-header>
-                <NavMenu></NavMenu>
-            </el-header>
-            <!-- 负责布局管理，内部分为左右各一半两个区域 -->
-
-
-
-            <!-- 显示具体检测数据的表格  -->
-            <el-main>
-                <!-- 最外层 div 内负责布局管理的，分为导航栏和主区域 -->
-                <el-row>
-
-                    <!-- 左侧，样品基本信息显示 -->
-                    <el-col :span="12">
-
-                        <!-- 负责左侧布局管理的 div -->
-                        <div class="grid-content bg-purple">
-                            <!--展示筛查实验室的报告-->
-                            <SampleInfo></SampleInfo>
-
-                            <!-- 负责左侧布局管理的 div -->
-                        </div>
-
-                    </el-col>
-
-                    <!-- 右侧 检测检测结果显示和输入栏  -->
-                    <el-col class="el-main-right-side" :span="12">
-                        <DetectionRecords></DetectionRecords>
-                    </el-col>
-
-                </el-row>
-            </el-main>
-        </el-container>
+            <!-- 左侧，样品基本信息显示 -->
+            <!--展示筛查实验室的报告-->
+            <SampleInfo></SampleInfo>
+            <!-- 负责左侧布局管理的 div -->
+            <!-- 右侧 检测检测结果显示和输入栏  -->
+            <DetectionRecords></DetectionRecords>
     </div>
 </template>
 
@@ -46,7 +14,7 @@
 import NavMenu from "@/components/NavMenu";
 import SampleInfo from "@/components/SampleInfo";
 import DetectionRecords from "@/components/DetectionRecords";
-import SampleList from "@/views/SampleList";
+import SampleList from "@/components/SampleList";
 
 export default {
     name: "InfoShow",

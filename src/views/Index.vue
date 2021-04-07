@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-title data-title="HIV抗体检测中心">
 
         <el-container>
 
@@ -18,7 +18,7 @@
 
 <script>
 import NavMenu from "@/components/NavMenu";
-import SampleList from "@/views/SampleList";
+import SampleList from "@/components/SampleList";
 
 export default {
     name: "Index",

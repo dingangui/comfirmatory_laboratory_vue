@@ -8,7 +8,7 @@ import SampleInfoUpdate from "@/views/SampleInfoUpdate";
 import DetectionDataInput from "@/views/DetectionDataInput";
 import Index from "@/views/Index";
 import InfoEdit from "@/views/InfoEdit";
-import InfoShow from "@/views/InfoShow";
+import InfoShow from "@/components/InfoShow";
 
 Vue.use(VueRouter)
 

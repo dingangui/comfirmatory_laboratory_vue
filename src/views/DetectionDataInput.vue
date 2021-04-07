@@ -28,6 +28,9 @@
 
             <!-- 显示具体检测数据的表格  -->
             <el-main v-else>
+                <el-page-header @back="goBack" content="输入检测结果">
+                </el-page-header>
+
                 <!-- 最外层 div 内负责布局管理的，分为导航栏和主区域 -->
                 <el-row>
 
@@ -138,7 +141,7 @@
                                 <el-row>
                                     <el-col :span="12">
                                         <div class="grid-content bg-purple">
-                                            <el-form-item prop="conclusion" label="结论" v-if="testTime === 4">
+                                            <el-form-item prop="conclusion" label="结论" v-if="testTime === 3">
                                                 <el-select v-model="detectionRecord.conclusion" placeholder="请选择">
                                                     <el-option
                                                         v-for="item in conclusions"
@@ -193,7 +196,7 @@
 import NavMenu from "@/components/NavMenu";
 import SampleInfo from "@/components/SampleInfo";
 import DetectionRecords from "@/components/DetectionRecords";
-import SampleList from "@/views/SampleList";
+import SampleList from "@/components/SampleList";
 
 export default {
     name: "DetectionDataInput",
@@ -352,6 +355,10 @@ export default {
                 }
             });
         },
+
+        goBack() {
+            history.go(-1);
+        }
     },
 
     watch: {

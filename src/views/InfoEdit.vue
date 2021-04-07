@@ -6,8 +6,10 @@
             <NavMenu></NavMenu>
         </el-header>
         <el-main>
-
-            <el-collapse v-model="activeNames" @change="handleChange">
+            <el-page-header @back="goBack" content="修改样品数据">
+            </el-page-header>
+            <br/>
+            <el-collapse v-model="activeNames" accordion>
                 <el-collapse-item title="修改样品基本信息" name="1">
                     <!--标题和编号显示-->
                     <h2>样品基本信息</h2>
@@ -174,13 +176,21 @@
 
                 </el-collapse-item>
                 <el-collapse-item v-for="detectionRecord in detectionRecords"
-                                  title="修改检测结果"
                                   v-name=detectionRecord.sequence>
+                    <template slot="title">
+                        修改
+                        <span v-if="detectionRecord.sequence === 1">筛查检测结果</span>
+                        <span v-if="detectionRecord.sequence === 2">第一次复检结果</span>
+                        <span v-if="detectionRecord.sequence === 3">第二次复检结果</span>
+                        <span v-if="detectionRecord.sequence === 4">确证检测结果</span>
+                    </template>
 
                     <div class="grid-content bg-purple-light detection-data-input-area sample-input">
+                        <h2 v-if="detectionRecord.sequence === 1">筛查实验室筛查检测结果</h2>
                         <h2 v-if="detectionRecord.sequence === 2">第一次复检结果</h2>
                         <h2 v-if="detectionRecord.sequence === 3">第二次复检结果</h2>
                         <h2 v-if="detectionRecord.sequence === 4">确证检测结果</h2>
+
                         <el-form :model="detectionRecord"
                                  :rules="rules"
                                  ref="detectionRecord"
@@ -291,7 +301,7 @@
                             <el-row>
                                 <el-col :span="24">
                                     <div class="text-align-right">
-                                        <el-button type="primary" @click="saveDetectionRecord('detectionRecord')">修改
+                                        <el-button type="primary" @click="updateDetectionRecord('detectionRecord',)">修改
                                         </el-button>
                                     </div>
                                 </el-col>
@@ -320,6 +330,18 @@ export default {
             sampleBasicInfo: {},
             detectionRecords: {},
             acceptanceNumber: '',
+            detectionRecord: {
+                acceptanceNumber: '',
+                detectionMethod: 'ELISA',
+                detectionDate: new Date,
+                reagentsAndManufacturers: '哈药六厂',
+                batchNumber: '990011',
+                effectiveDate: '2021-02-11',
+                testResult: '有反应',
+                conclusion: 'HIV抗体阳性',
+                inspectorAccountID: '',
+                inspectorName: '',
+            },
             /*检测结果（带型）的选项（复检用）*/
             testResult: [{
                 value: '有反应',
@@ -424,17 +446,28 @@ export default {
                         picker.$emit('pick', date);
                     }
                 }]
-            }
+            },
+            activeNames: ['1']
         }
     },
     methods: {
-        saveDetectionRecord(detectionRecord) {
+        updateDetectionRecord(detectionRecord) {
+            console.log(this.detectionRecord);
+            console.log(detectionRecord);
+            this.detectionRecord = detectionRecord
+            this.detectionRecord.inspectorName = this.$store.getters.getUser.username
+            this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
+            this.$axios.post("/sampleBasicInfo/update", this.detectionRecord).then(res => {
+                    alert(res.data.msg);
+                    // console.log(res.data);
+                }
+            )
+
+
         },
         updateSampleInfo(sampleBasicInfo) {
             this.$refs[sampleBasicInfo].validate((valid) => {
                 if (valid) {
-
-                    const _this = this
 
                     this.sampleBasicInfo.acceptanceNumber = this.acceptanceNumber
                     this.sampleBasicInfo.dataEntryStaffName = this.$store.getters.getUser.username
@@ -448,7 +481,6 @@ export default {
                     * 引入 axios.js 需要 在main.js 中 import "./axios"
                     * */
                     this.$axios.post("/sampleBasicInfo/update", this.sampleBasicInfo).then(res => {
-                            console.log(res.data.msg);
                             alert(res.data.msg);
                             // console.log(res.data);
                             this.$router.push('/InfoShow/' + this.acceptanceNumber)
@@ -461,8 +493,10 @@ export default {
                     return false;
                 }
             });
+        },
+        goBack() {
+            history.go(-1);
         }
-
     },
     created() {
         let acceptanceNumber = sessionStorage.getItem("acceptanceNumber")
@@ -472,7 +506,7 @@ export default {
             _this.sampleBasicInfo = res.data.data
         })
 
-        this.$axios.get("/detectionRecord/getOtherThreeDetectionRecords/" + acceptanceNumber).then(res => {
+        this.$axios.get("/detectionRecord/getDetectionRecords/" + acceptanceNumber).then(res => {
             _this.detectionRecords = res.data.data
         })
 

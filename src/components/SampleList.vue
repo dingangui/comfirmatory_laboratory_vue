@@ -75,11 +75,39 @@
                 </el-col>
                 <el-col :span="9">
                     <div class="grid-content bg-purple-light">
-                        <el-button type="primary" @click="operation(sampleList.flag,sampleList.acceptanceNumber)">
-                            {{ sampleList.operation }}
-                        </el-button>
-                        <el-button type="warning" @click="infoEdit(sampleList.acceptanceNumber)">修改</el-button>
-                        <el-button type="danger">删除</el-button>
+                        <el-button-group>
+                            <el-tooltip placement="left">
+                                <div slot="content">{{ sampleList.operation }}</div>
+                                <el-button class="operation"
+                                           type="primary"
+                                           icon="el-icon-mouse"
+                                           @click="operation(sampleList.flag,sampleList.acceptanceNumber)">
+                                </el-button>
+                            </el-tooltip>
+                            <el-button type="primary"
+                                       icon="el-icon-view"
+                                       @click="infoShow(sampleList.acceptanceNumber)"></el-button>
+
+                            <el-drawer
+                                :visible.sync="drawer"
+                                :direction="direction"
+                                size="60%"
+                                :destroy-on-close="true"
+                                :before-close="handleClose">
+                                <el-container>
+
+                                    <el-main><info-show></info-show></el-main>
+                                </el-container>
+
+                            </el-drawer>
+
+                            <el-button type="primary"
+                                       icon="el-icon-edit"
+                                       @click="infoEdit(sampleList.acceptanceNumber)"></el-button>
+                            <el-button type="primary"
+                                       icon="el-icon-delete"
+                                       @click="infoDelete(sampleList.acceptanceNumber)"></el-button>
+                        </el-button-group>
                     </div>
                 </el-col>
             </el-row>
@@ -90,16 +118,30 @@
 
 <script>
 
+import InfoShow from "@/components/InfoShow";
+
 export default {
     name: "SampleList",
+    components: {InfoShow},
     data() {
         return {
             sampleLists: [
                 {currentState: ''}
-            ]
+            ],
+            dialogVisible: false,
+            drawer: false,
+            direction: 'ltr',
         }
     },
     methods: {
+        handleClose(done) {
+            done();
+        },
+        infoShow(acceptanceNumber) {
+            this.drawer = true
+            sessionStorage.setItem("acceptanceNumber", acceptanceNumber);
+
+        },
         infoEdit(acceptanceNumber) {
             sessionStorage.setItem("acceptanceNumber", acceptanceNumber);
             this.$router.push("/InfoEdit/" + acceptanceNumber);
@@ -117,6 +159,26 @@ export default {
                 sessionStorage.setItem("acceptanceNumber", acceptanceNumber);
                 this.$router.push("/FormOutput/" + acceptanceNumber);
             }
+        },
+        infoDelete(acceptanceNumber) {
+            sessionStorage.setItem("acceptanceNumber", acceptanceNumber);
+            this.$confirm('此操作将删除该样品，不可恢复，是否继续？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning',
+                center: true
+            }).then(() => {
+                this.$message({
+                    type: 'success',
+                    message: '删除成功!',
+                });
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });
+            });
+
         }
     },
     created() {

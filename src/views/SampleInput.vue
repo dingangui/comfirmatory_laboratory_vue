@@ -10,7 +10,8 @@
 
             <!--信息输入页面-->
             <el-main class="sample-input">
-
+                <el-page-header @back="goBack" content="输入检测结果">
+                </el-page-header>
                 <!--标题和编号显示-->
                 <h1>样品基本信息录入</h1>
                 <div class="text-align-right">样品受理编号：{{ acceptanceNumber }}</div>
@@ -438,6 +439,10 @@ export default {
         },
         resetForm(formName) {
             this.$refs[formName].resetFields();
+        },
+
+        goBack() {
+            history.go(-1);
         }
     },
 

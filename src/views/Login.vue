@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-title data-title="HIV抗体检测中心">
         <el-container>
             <el-header id="login-el-header">
                 <h1>HIV 抗 体 检 测 中 心</h1>

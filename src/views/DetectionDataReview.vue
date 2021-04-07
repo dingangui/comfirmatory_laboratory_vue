@@ -128,7 +128,7 @@
 import NavMenu from "@/components/NavMenu";
 import SampleInfo from "@/components/SampleInfo";
 import DetectionRecords from "@/components/DetectionRecords";
-import SampleList from "@/views/SampleList";
+import SampleList from "@/components/SampleList";
 
 export default {
     name: "DetectionDataReview",
