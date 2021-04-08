@@ -1,6 +1,7 @@
 <template>
     <div>
 
+        <!--显示样品基本信息，只显示基本信息，不显示检测结果-->
         <div class="data-show">
             <h1>HIV感染待确定报告</h1>
             <div class="text-align-right">样品受理编号：{{ sampleBasicInfo.acceptanceNumber }}</div>

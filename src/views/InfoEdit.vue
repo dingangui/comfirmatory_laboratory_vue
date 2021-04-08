@@ -241,7 +241,7 @@
                                     </el-form-item>
                                 </el-col>
 
-                                <el-col :span="12" v-if="detectionRecord.sequence === 3">
+                                <el-col :span="12" v-if="detectionRecord.sequence === 4">
                                     <el-form-item label="检测结果(带型)" prop="testResult">
                                         <el-select v-model="detectionRecord.testResult" placeholder="请选择">
                                             <el-option
@@ -301,7 +301,9 @@
                             <el-row>
                                 <el-col :span="24">
                                     <div class="text-align-right">
-                                        <el-button type="primary" @click="updateDetectionRecord('detectionRecord',)">修改
+                                        <el-button type="primary"
+                                                   @click="updateDetectionRecord('detectionRecord',detectionRecord.sequence)">
+                                            修改
                                         </el-button>
                                     </div>
                                 </el-col>
@@ -451,21 +453,32 @@ export default {
         }
     },
     methods: {
-        updateDetectionRecord(detectionRecord) {
-            console.log(this.detectionRecord);
-            console.log(detectionRecord);
-            this.detectionRecord = detectionRecord
-            this.detectionRecord.inspectorName = this.$store.getters.getUser.username
-            this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
-            this.$axios.post("/sampleBasicInfo/update", this.detectionRecord).then(res => {
-                    alert(res.data.msg);
-                    // console.log(res.data);
+        /*
+        多个表单在遍历中的校验实现过程
+
+        */
+        updateDetectionRecord(detectionRecord, sequence) {
+            const _this = this
+
+            this.$refs[detectionRecord][sequence - 1].validate((valid) => {
+                if (valid) {
+                    console.log(this.detectionRecords[sequence - 1]);
+                    this.$axios.post("/detectionRecord/update", this.detectionRecords[sequence - 1]).then(res => {
+                            alert(res.data.msg);
+                            // console.log(res.data);
+                            _this.$router.push('/DetectionDataInput/'+this.acceptanceNumber)
+
+                        }
+                    )
+                } else {
+                    alert('error submit!!');
+                    return false;
                 }
-            )
-
-
+            });
         },
         updateSampleInfo(sampleBasicInfo) {
+            const _this = this
+
             this.$refs[sampleBasicInfo].validate((valid) => {
                 if (valid) {
 
@@ -483,8 +496,7 @@ export default {
                     this.$axios.post("/sampleBasicInfo/update", this.sampleBasicInfo).then(res => {
                             alert(res.data.msg);
                             // console.log(res.data);
-                            this.$router.push('/InfoShow/' + this.acceptanceNumber)
-
+                            _this.$router.push('/DetectionDataInput/'+this.acceptanceNumber)
                         }
                     )
 

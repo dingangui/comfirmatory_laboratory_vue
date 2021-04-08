@@ -2,6 +2,7 @@
 
 
     <div>
+        <!--显示待处理样品列表-->
         <!--信息输入页面-->
         <h1>待处理样品列表</h1>
         <div class="data-show" id="data-show-index">
@@ -112,7 +113,19 @@
                 </el-col>
             </el-row>
 
+
         </div>
+        <el-row>
+            <el-col :span="24">
+                <div class="grid-content bg-purple-light text-align-right data-show">
+                    <el-button class="operation"
+                               type="primary"
+                               icon="el-icon-plus"
+                               @click="addSample()">
+                    </el-button>
+                </div>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
@@ -140,7 +153,10 @@ export default {
         infoShow(acceptanceNumber) {
             this.drawer = true
             sessionStorage.setItem("acceptanceNumber", acceptanceNumber);
+        },
 
+        addSample(){
+            this.$router.push('/SampleInput/')
         },
         infoEdit(acceptanceNumber) {
             sessionStorage.setItem("acceptanceNumber", acceptanceNumber);
@@ -161,13 +177,19 @@ export default {
             }
         },
         infoDelete(acceptanceNumber) {
+            const _this = this
             sessionStorage.setItem("acceptanceNumber", acceptanceNumber);
-            this.$confirm('此操作将删除该样品，不可恢复，是否继续？', '提示', {
+            this.$confirm('此操作将删除该样品信息，不可恢复，是否继续？', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning',
                 center: true
             }).then(() => {
+                _this.$axios.get("/sampleBasicInfo/delete/"+ acceptanceNumber).then(res => {
+                        // console.log(res.data);
+                    }
+                )
+
                 this.$message({
                     type: 'success',
                     message: '删除成功!',

@@ -9,6 +9,7 @@ import DetectionDataInput from "@/views/DetectionDataInput";
 import Index from "@/views/Index";
 import InfoEdit from "@/views/InfoEdit";
 import InfoShow from "@/components/InfoShow";
+import ConfReportOutput from "@/views/ConfReportOutput";
 
 Vue.use(VueRouter)
 
@@ -64,6 +65,16 @@ const routes = [
     path: '/InfoEdit/:AcceptanceNumber',
     name: 'InfoEdit',
     component: InfoEdit
+  },
+  {
+    path: '/ConfReportOutput',
+    name: 'ConfReportOutput',
+    component: ConfReportOutput
+  },
+  {
+    path: '/ConfReportOutput/:AcceptanceNumber',
+    name: 'ConfReportOutput',
+    component: ConfReportOutput
   },
   /*{
     path: '/DetectionDataReview/:AcceptanceNumber',

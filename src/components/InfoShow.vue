@@ -11,14 +11,12 @@
 </template>
 
 <script>
-import NavMenu from "@/components/NavMenu";
 import SampleInfo from "@/components/SampleInfo";
 import DetectionRecords from "@/components/DetectionRecords";
-import SampleList from "@/components/SampleList";
 
 export default {
     name: "InfoShow",
-    components: {NavMenu, SampleInfo, DetectionRecords, SampleList},
+    components: {SampleInfo, DetectionRecords},
     created() {
 
 

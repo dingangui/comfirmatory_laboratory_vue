@@ -91,13 +91,13 @@ export default {
                     items: [],
                 },*/
                 {
-                    title: "导出报表",
+                    title: "导出报告",
                     key: "",
                     path: "",
                     items: [
                         {
-                            title: "导出A表",
-                            key: "",
+                            title: "导出确证报告",
+                            key: "/ConfReportOutput",
                             path: "",
                         },
                         {
