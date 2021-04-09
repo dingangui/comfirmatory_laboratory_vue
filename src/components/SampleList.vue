@@ -173,7 +173,10 @@ export default {
             }
             if (flag === 'waitingForOutput') {
                 sessionStorage.setItem("acceptanceNumber", acceptanceNumber);
-                this.$router.push("/FormOutput/" + acceptanceNumber);
+                this.$axios.get("/report/confReportOutput/"+ acceptanceNumber).then(res => {
+                        // console.log(res.data);
+                    }
+                )
             }
         },
         infoDelete(acceptanceNumber) {
