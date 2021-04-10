@@ -175,7 +175,14 @@
                             <el-row>
                                 <el-col :span="12">
                                     <el-form-item prop="detectionMethod" label="检测方法">
-                                        <el-input v-model="detectionRecord.detectionMethod"></el-input>
+                                        <el-select v-model="detectionRecord.detectionMethod" placeholder="请选择">
+                                            <el-option
+                                                v-for="item in detectionMethod"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                            </el-option>
+                                        </el-select>
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="12">
@@ -279,7 +286,7 @@ export default {
             sampleBasicInfo: {
                 inspectionUnit: '第一医院',
                 inspectionDate: new Date,
-                sampleType: '血液',
+                sampleType: '血清',
                 inspectedType: '门诊',
                 name: '王铅华',
                 sex: '男',
@@ -309,6 +316,16 @@ export default {
                 inspectorName: '',
             },
             acceptanceNumber: '',
+            detectionMethod: [{
+                value: 'ELISA',
+                label: 'ELISA'
+            }, {
+                value: 'RT',
+                label: 'RT'
+            }, {
+                value: 'WB',
+                label: 'WB'
+            }],
             testResult: [{
                 value: '有反应',
                 label: '有反应'
@@ -404,11 +421,7 @@ export default {
                     * 引入 axios.js 后，就可以不用在 url 中写上 http://localhost:5000 了
                     * 引入 axios.js 需要 在main.js 中 import "./axios"
                     * */
-                    this.$axios.post("/sampleBasicInfo/save", this.sampleBasicInfo).then(res => {
-                            console.log(res.data.msg);
-                            // console.log(res.data);
-                        }
-                    )
+
                 } else {
                     alert('error submit!!');
                     return false;
@@ -425,6 +438,11 @@ export default {
 
                     const _this = this;
 
+                    this.$axios.post("/sampleBasicInfo/save", this.sampleBasicInfo).then(res => {
+                            console.log(res.data.msg);
+                            // console.log(res.data);
+                        }
+                    )
                     this.$axios.post("/detectionRecord/save", this.detectionRecord).then(res => {
                             alert(res.data.msg);
                             _this.$router.push("/DetectionDataInput/" + _this.acceptanceNumber);

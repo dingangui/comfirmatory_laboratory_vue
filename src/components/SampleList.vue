@@ -173,10 +173,7 @@ export default {
             }
             if (flag === 'waitingForOutput') {
                 sessionStorage.setItem("acceptanceNumber", acceptanceNumber);
-                this.$axios.get("/report/confReportOutput/"+ acceptanceNumber).then(res => {
-                        // console.log(res.data);
-                    }
-                )
+                window.location.href = "http://localhost:5000/report/confReportOutput/"+ acceptanceNumber;
             }
         },
         infoDelete(acceptanceNumber) {

@@ -67,7 +67,14 @@
                                 <el-row>
                                     <el-col :span="12">
                                         <el-form-item prop="detectionMethod" label="检测方法">
-                                            <el-input v-model="detectionRecord.detectionMethod"></el-input>
+                                            <el-select v-model="detectionRecord.detectionMethod" placeholder="请选择">
+                                                <el-option
+                                                    v-for="item in detectionMethod"
+                                                    :key="item.value"
+                                                    :label="item.label"
+                                                    :value="item.value">
+                                                </el-option>
+                                            </el-select>
                                         </el-form-item>
                                     </el-col>
                                     <el-col :span="12">
@@ -214,11 +221,20 @@ export default {
                 reagentsAndManufacturers: '哈药六厂',
                 batchNumber: '990011',
                 effectiveDate: '2021-02-11',
-                testResult: '',
+                testResult: '有反应',
                 inspectorAccountID: '',
                 inspectorName: '',
             },
-
+            detectionMethod: [{
+                value: 'ELISA',
+                label: 'ELISA'
+            }, {
+                value: 'RT',
+                label: 'RT'
+            }, {
+                value: 'WB',
+                label: 'WB'
+            }],
             /*检测结果（带型）的选项（复检用）*/
             testResult: [{
                 value: '有反应',
