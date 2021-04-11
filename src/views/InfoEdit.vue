@@ -14,10 +14,11 @@
                     <!--标题和编号显示-->
                     <h2>样品基本信息</h2>
 
-                    <div>样品受理编号：{{ acceptanceNumber }}</div>
 
                     <!--表单输入界面-->
                     <div class="sample-input">
+                        <div class="text-align-right">样品受理编号：{{ acceptanceNumber }}</div>
+
                         <el-form :model="sampleBasicInfo"
                                  :rules="rules"
                                  ref="sampleBasicInfo"
@@ -194,7 +195,7 @@
                         <el-form :model="detectionRecord"
                                  :rules="rules"
                                  ref="detectionRecord"
-                                 label-width="140px">
+                                 label-width="9em">
                             <el-row>
                                 <el-col :span="12">
                                     <el-form-item prop="detectionMethod" label="检测方法">
@@ -281,7 +282,7 @@
                                     <div class="grid-content bg-purple">
                                         <el-form-item prop="conclusion" label="结论"
                                                       v-if="detectionRecord.sequence === 4">
-                                            <el-select v-model="detectionRecord.conclusion" placeholder="请选择">
+                                            <el-select v-model="detectionRecord.conclusion" placeholder="请选择" disabled>
                                                 <el-option
                                                     v-for="item in conclusions"
                                                     :key="item.value"
@@ -292,7 +293,7 @@
                                         </el-form-item>
 
                                         <el-form-item prop="conclusion" label="筛查结论" v-else>
-                                            <el-select v-model="detectionRecord.conclusion" placeholder="请选择">
+                                            <el-select v-model="detectionRecord.conclusion" placeholder="请选择" disabled>
                                                 <el-option
                                                     v-for="item in screeningConclusions"
                                                     :key="item.value"
@@ -434,8 +435,6 @@ export default {
                     {required: true, message: '请选择检测者姓名', trigger: 'change'},
                 ], reviewerName: [
                     {required: true, message: '请选择审核者姓名', trigger: 'change'},
-                ], conclusion: [
-                    {required: true, message: '请输入结论', trigger: 'change'},
                 ]
             },
 

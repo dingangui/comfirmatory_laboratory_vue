@@ -174,16 +174,32 @@
                                  label-width="140px">
                             <el-row>
                                 <el-col :span="12">
+
                                     <el-form-item prop="detectionMethod" label="检测方法">
-                                        <el-select v-model="detectionRecord.detectionMethod" placeholder="请选择">
-                                            <el-option
-                                                v-for="item in detectionMethod"
-                                                :key="item.value"
-                                                :label="item.label"
-                                                :value="item.value">
-                                            </el-option>
-                                        </el-select>
+                                        <el-tooltip class="item"
+                                                    effect="dark"
+                                                    content="可新增其他检测方法，直接输入后按回车添加"
+                                                    placement="top-start">
+                                            <el-select
+                                                v-model="detectionRecord.detectionMethod"
+                                                placeholder="请选择"
+                                                filterable
+                                                default-first-option
+                                                clearable
+                                                allow-create>
+
+                                                <el-option
+                                                    v-for="item in detectionMethod"
+                                                    :key="item.value"
+                                                    :label="item.label"
+                                                    :value="item.value">
+                                                </el-option>
+
+                                            </el-select>
+                                        </el-tooltip>
+
                                     </el-form-item>
+
                                 </el-col>
                                 <el-col :span="12">
                                     <el-form-item prop="detectionDate" label="检测日期">
@@ -305,23 +321,23 @@ export default {
             },
             detectionRecord: {
                 acceptanceNumber: '',
-                detectionMethod: 'ELISA',
+                detectionMethod: '',
                 detectionDate: new Date,
                 reagentsAndManufacturers: '哈药六厂',
                 batchNumber: '990011',
                 effectiveDate: '2021-02-11',
                 testResult: '有反应',
-                conclusion: 'HIV抗体阳性',
+                conclusion: '',
                 inspectorAccountID: '',
                 inspectorName: '',
             },
             acceptanceNumber: '',
             detectionMethod: [{
-                value: 'ELISA',
-                label: 'ELISA'
+                value: 'ELISA（BIO-RAD）',
+                label: 'ELISA（BIO-RAD）'
             }, {
-                value: 'RT',
-                label: 'RT'
+                value: 'RT（Determine）',
+                label: 'RT（Determine）'
             }, {
                 value: 'WB',
                 label: 'WB'
@@ -409,10 +425,55 @@ export default {
             this.$refs[sampleBasicInfo].validate((valid) => {
                 if (valid) {
 
+                    this.$refs[detectionRecord].validate((valid) => {
 
-                    this.sampleBasicInfo.acceptanceNumber = this.acceptanceNumber
-                    this.sampleBasicInfo.dataEntryStaffName = this.$store.getters.getUser.username
-                    this.sampleBasicInfo.dataEntryStaffAccountID = this.$store.getters.getUser.id
+                        this.sampleBasicInfo.acceptanceNumber = this.acceptanceNumber
+                        this.sampleBasicInfo.dataEntryStaffName = this.$store.getters.getUser.username
+                        this.sampleBasicInfo.dataEntryStaffAccountID = this.$store.getters.getUser.id
+
+                        if (valid) {
+                            const _this = this;
+                            this.$confirm('筛查检测结论为"' + this.detectionRecord.conclusion + '"，提交后不可修改，是否确定？', '提示', {
+                                confirmButtonText: '确定',
+                                cancelButtonText: '取消',
+                                type: 'warning',
+                                center: true
+                            }).then(() => {
+
+                                this.detectionRecord.inspectorName = this.$store.getters.getUser.username
+                                this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
+                                this.detectionRecord.acceptanceNumber = this.acceptanceNumber
+
+                                sessionStorage.setItem("acceptanceNumber", this.acceptanceNumber)
+                                this.$axios.post("/sampleBasicInfo/save", this.sampleBasicInfo).then(res => {
+                                        console.log(res.data.msg);
+                                        // console.log(res.data);
+                                    }
+                                )
+                                this.$axios.post("/detectionRecord/save", this.detectionRecord).then(res => {
+                                        this.$message({
+                                            type: 'success',
+                                            message: res.data.msg
+                                        });
+                                        _this.$router.push("/DetectionDataInput/" + _this.acceptanceNumber);
+                                    }
+                                )
+                            }).catch(() => {
+                                this.$message({
+                                    type: 'info',
+                                    message: '已取消'
+                                });
+                            });
+                        } else {
+                            this.$message({
+                                type: 'error',
+                                message: '表单内容错误'
+                            });
+                            return false;
+                        }
+                    });
+
+
                     // alert('提交成功!');
                     /*
                     * post 中的 this.sampleBasicInfo 表示 post 提交到对应链接时的内容
@@ -428,31 +489,6 @@ export default {
                 }
             });
 
-            this.$refs[detectionRecord].validate((valid) => {
-                if (valid) {
-                    this.detectionRecord.inspectorName = this.$store.getters.getUser.username
-                    this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
-                    this.detectionRecord.acceptanceNumber = this.acceptanceNumber
-
-                    sessionStorage.setItem("acceptanceNumber", this.acceptanceNumber)
-
-                    const _this = this;
-
-                    this.$axios.post("/sampleBasicInfo/save", this.sampleBasicInfo).then(res => {
-                            console.log(res.data.msg);
-                            // console.log(res.data);
-                        }
-                    )
-                    this.$axios.post("/detectionRecord/save", this.detectionRecord).then(res => {
-                            alert(res.data.msg);
-                            _this.$router.push("/DetectionDataInput/" + _this.acceptanceNumber);
-                        }
-                    )
-                } else {
-                    alert('表单内容错误');
-                    return false;
-                }
-            });
 
         },
         resetForm(formName) {

@@ -67,14 +67,28 @@
                                 <el-row>
                                     <el-col :span="12">
                                         <el-form-item prop="detectionMethod" label="检测方法">
-                                            <el-select v-model="detectionRecord.detectionMethod" placeholder="请选择">
-                                                <el-option
-                                                    v-for="item in detectionMethod"
-                                                    :key="item.value"
-                                                    :label="item.label"
-                                                    :value="item.value">
-                                                </el-option>
-                                            </el-select>
+                                            <el-tooltip
+                                                class="item"
+                                                effect="dark"
+                                                content="可新增其他检测方法，直接输入后按回车添加"
+                                                placement="top-start">
+                                                <el-select
+                                                    v-model="detectionRecord.detectionMethod"
+                                                    placeholder="请选择"
+                                                    filterable
+                                                    default-first-option
+                                                    clearable
+                                                    allow-create>
+
+                                                    <el-option
+                                                        v-for="item in detectionMethod"
+                                                        :key="item.value"
+                                                        :label="item.label"
+                                                        :value="item.value">
+                                                    </el-option>
+
+                                                </el-select>
+                                            </el-tooltip>
                                         </el-form-item>
                                     </el-col>
                                     <el-col :span="12">
@@ -216,21 +230,22 @@ export default {
             /*当前输入检测记录*/
             detectionRecord: {
                 acceptanceNumber: '',
-                detectionMethod: 'ELISA',
+                detectionMethod: '',
                 detectionDate: new Date,
                 reagentsAndManufacturers: '哈药六厂',
                 batchNumber: '990011',
                 effectiveDate: '2021-02-11',
-                testResult: '有反应',
+                testResult: '',
+                conclusion: '',
                 inspectorAccountID: '',
                 inspectorName: '',
             },
             detectionMethod: [{
-                value: 'ELISA',
-                label: 'ELISA'
+                value: 'ELISA（BIO-RAD）',
+                label: 'ELISA（BIO-RAD）'
             }, {
-                value: 'RT',
-                label: 'RT'
+                value: 'RT（Determine）',
+                label: 'RT（Determine）'
             }, {
                 value: 'WB',
                 label: 'WB'
@@ -306,8 +321,6 @@ export default {
                 disabledDate(time) {
                     return time.getTime() > Date.now();
                 },
-
-
                 shortcuts: [{
                     text: '今天',
                     onClick(picker) {
@@ -353,23 +366,45 @@ export default {
                     * 检测人ID
                     *
                     * */
-                    this.detectionRecord.acceptanceNumber = sessionStorage.getItem("acceptanceNumber")
-
-                    this.detectionRecord.inspectorName = this.$store.getters.getUser.username
-                    this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
 
                     const _this = this;
+                    this.$confirm('本轮检测结论为"' + this.detectionRecord.conclusion + '"，提交后不可修改，是否确定？', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
 
-                    this.$axios.post("/detectionRecord/save", this.detectionRecord).then(res => {
-                            alert(res.data.msg)
-                            _this.reload();
-                        }
-                    )
+                        this.detectionRecord.acceptanceNumber = sessionStorage.getItem("acceptanceNumber")
+                        this.detectionRecord.inspectorName = this.$store.getters.getUser.username
+                        this.detectionRecord.inspectorAccountID = this.$store.getters.getUser.id
+
+                        this.$axios.post("/detectionRecord/save", this.detectionRecord).then(res => {
+                                _this.reload();
+                                this.$message({
+                                    type: 'success',
+                                    message: res.data.msg
+                                });
+                            }
+                        )
+
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消'
+                        });
+                    });
+
+
                 } else {
-                    console.log('error submit!!');
+                    this.$message({
+                        type: 'error',
+                        message: '表单内容错误'
+                    });
                     return false;
                 }
             });
+
+
         },
 
         goBack() {
