@@ -136,6 +136,7 @@ import InfoShow from "@/components/InfoShow";
 export default {
     name: "SampleList",
     components: {InfoShow},
+    inject: ['reload'],
     data() {
         return {
             sampleLists: [
@@ -173,7 +174,7 @@ export default {
             }
             if (flag === 'waitingForOutput') {
                 sessionStorage.setItem("acceptanceNumber", acceptanceNumber);
-                window.location.href = "http://localhost:5000/report/confReportOutput/"+ acceptanceNumber;
+                window.location.href = "http://localhost:5000/report/reportOutput/"+ acceptanceNumber;
             }
         },
         infoDelete(acceptanceNumber) {
@@ -187,13 +188,16 @@ export default {
             }).then(() => {
                 _this.$axios.get("/sampleBasicInfo/delete/"+ acceptanceNumber).then(res => {
                         // console.log(res.data);
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!',
+                    });
+                    _this.reload();
+
                     }
                 )
 
-                this.$message({
-                    type: 'success',
-                    message: '删除成功!',
-                });
+
             }).catch(() => {
                 this.$message({
                     type: 'info',
